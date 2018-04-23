@@ -1,15 +1,10 @@
 <mat-toolbar color="primary">
   <div class="row" style="width:100%">
-    <span class="col-xl-8 col-sm-8">Welcome to our awsome who is nearest game!</span>
+    <span class="col-xl-8 col-sm-8">
+      Welcome to our awsome who is nearest game!
+    </span>
     <div class="col-xl-4 end-xl col-sm-4">
-      <div *ngIf="!user">
-        <button mat-button color="secondary" *ngIf="!user" (click)="doLogin()">Login</button>
-      </div>
-      <div *ngIf="user">
-        <span>Welcome {{user.displayName}}</span>
-        <img class="user-image" [src]="user.photoURL" width="32" height="32" />
-        <button mat-button color="secondary" (click)="doLogout()">Logout</button>
-      </div>
+      <app-account></app-account>
     </div>
   </div>
 </mat-toolbar>
@@ -22,16 +17,19 @@
 
 <mat-card>
   <mat-form-field>
-    <mat-select placeholder="Select your guess">
+    <mat-select placeholder="Select your guess" [(ngModel)]="selected" >
       <mat-option *ngFor="let number of numbers" [value]="number">
         {{ number }}
       </mat-option>
     </mat-select>
   </mat-form-field>
   <div class="row">
-    <button mat-raised-button color="primary">
-      submit your guess
-    </button>
+    <button mat-raised-button color="primary" (click)="submit()">submit your guess</button>
   </div>
 
 </mat-card>
+
+<h2>Submitions: </h2>
+<div *ngFor="let submition of submitions$ | async">
+  {{submition.value}} {{submition.userDisplayName}}
+</div>

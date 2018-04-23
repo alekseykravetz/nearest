@@ -1,0 +1,8 @@
+<div *ngIf="!accountService.user">
+  <button mat-button color="secondary" *ngIf="!user" (click)="doLogin()">Login</button>
+</div>
+<div *ngIf="accountService.user">
+  <span>Welcome {{accountService.user.displayName}}</span>
+  <img class="user-image" [src]="accountService.user.photoURL" width="32" height="32" />
+  <button mat-button color="secondary" (click)="doLogout()">Logout</button>
+</div>

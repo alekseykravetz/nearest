@@ -1,3 +1,4 @@
+import { AccountService } from './services/account.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -6,6 +7,7 @@ import { User } from '@firebase/auth-types';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { IGame } from './models/game';
+import { ISubmition } from './models/submition';
 
 
 @Component({
@@ -13,19 +15,17 @@ import { IGame } from './models/game';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
 
   title = 'nearest';
   numbers: number[] = [];
-  user: User;
-
+  selected: number;
   game$: Observable<IGame>;
-
-  private userSub: Subscription;
+  submitions$: Observable<ISubmition[]>;
 
   constructor(
     private db: AngularFirestore,
-    private myAuth: AngularFireAuth) {
+    private accountService: AccountService) {
 
   }
 
@@ -33,27 +33,16 @@ export class AppComponent implements OnInit, OnDestroy {
     for (let i = 0; i < 100; i++) {
       this.numbers.push(i + 1);
     }
+    // this.db.collection('games').doc<IGame>('testGame').set({ secondsLeftUntilNextRaffle: 60 });
 
-    this.userSub = this.myAuth.authState.subscribe(user => {
-      this.user = user;
-    });
-
-    this.db.collection('games').doc<IGame>('testGame').set({ secondsLeftUntilNextRaffle: 60 });
-  
+    this.submitions$ = this.db.collection('games').doc<IGame>('testGame').collection<ISubmition>('submitions').valueChanges();
   }
 
-  doLogin() {
-    this.myAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-    
-    this.game$ = this.db.collection('games').doc<IGame>('testGame').valueChanges();
-    
+  submit() {
+    this.db.collection('games').doc<IGame>('testGame').collection<ISubmition>('submitions').add({
+      userDisplayName: this.accountService.user.displayName,
+      value: this.selected
+    } as ISubmition);
   }
 
-  doLogout() {
-    this.myAuth.auth.signOut();
-  }
-
-  ngOnDestroy() {
-    this.userSub.unsubscribe();
-  }
 }

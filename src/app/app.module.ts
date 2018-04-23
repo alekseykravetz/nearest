@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
@@ -7,20 +8,24 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatToolbarModule, MatFormFieldModule, MatSelectModule, MatOptionModule, MatCardModule} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatToolbarModule, MatFormFieldModule, MatSelectModule, MatOptionModule, MatCardModule } from '@angular/material';
 
 
 import { AppComponent } from './app.component';
+import { AccountComponent } from './account/account.component';
+import { AccountService } from './services/account.service';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AccountComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -31,7 +36,7 @@ import { AppComponent } from './app.component';
     NoopAnimationsModule,
     MatButtonModule, MatToolbarModule, MatFormFieldModule, MatSelectModule, MatOptionModule, MatCardModule,
   ],
-  providers: [],
+  providers: [AccountService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

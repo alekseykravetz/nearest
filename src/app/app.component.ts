@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { IGame } from './models/game';
 import { ISubmition } from './models/submition';
-
+import { get1to100array } from './helpers/one-to-one-hundred.helper';
 
 @Component({
   selector: 'app-root',
@@ -17,8 +17,7 @@ import { ISubmition } from './models/submition';
 })
 export class AppComponent implements OnInit {
 
-  title = 'nearest';
-  numbers: number[] = [];
+  numbers: number[];
   selected: number;
   game$: Observable<IGame>;
   submitions$: Observable<ISubmition[]>;
@@ -30,11 +29,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    for (let i = 0; i < 100; i++) {
-      this.numbers.push(i + 1);
-    }
-    // this.db.collection('games').doc<IGame>('testGame').set({ secondsLeftUntilNextRaffle: 60 });
-
+    this.numbers = get1to100array();
+    this.game$ = this.db.collection('games').doc<IGame>('testGame').valueChanges();
     this.submitions$ = this.db.collection('games').doc<IGame>('testGame').collection<ISubmition>('submitions').valueChanges();
   }
 

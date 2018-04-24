@@ -1,9 +1,13 @@
-<mat-toolbar color="primary">
-  <div class="row" style="width:100%">
-    <span class="col-xl-8 col-sm-8">
+<mat-toolbar color="primary" style="height: 128px">
+  <div class="row middle-xs" style="width: 100%">
+    <span class="col-xs-12
+                 col-sm-8">
       Welcome to our awsome who is nearest game!
     </span>
-    <div class="col-xl-4 end-xl col-sm-4">
+    <div class="col-xs-12
+                col-sm-4
+                last-sm
+                first-xs">
       <app-account></app-account>
     </div>
   </div>
@@ -11,25 +15,32 @@
 
 <mat-card>
   <mat-toolbar>
+    <i class="far fa-clock" style="margin-right: 10px"></i>
     <span>Time until next winner: {{ (game$ | async)?.secondsLeftUntilNextRaffle }}</span>
   </mat-toolbar>
 </mat-card>
 
 <mat-card>
+  <mat-card-subtitle>
+    <h3>Choose 1-100</h3>
+  </mat-card-subtitle>
+  <img mat-card-image>
   <mat-form-field>
-    <mat-select placeholder="Select your guess" [(ngModel)]="selected" >
+    <mat-select placeholder="Select your guess" [(ngModel)]="selected">
       <mat-option *ngFor="let number of numbers" [value]="number">
         {{ number }}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <div class="row">
+  <div>
     <button mat-raised-button color="primary" (click)="submit()">submit your guess</button>
   </div>
 
 </mat-card>
 
 <h2>Submitions: </h2>
-<div *ngFor="let submition of submitions$ | async">
-  {{submition.value}} {{submition.userDisplayName}}
-</div>
+<mat-list>
+  <mat-list-item *ngFor="let submition of submitions$ | async">
+    {{submition.userDisplayName}}: {{submition.value}}
+  </mat-list-item>
+</mat-list>

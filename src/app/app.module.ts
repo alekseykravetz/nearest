@@ -10,7 +10,16 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatToolbarModule, MatFormFieldModule, MatSelectModule, MatOptionModule, MatCardModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatToolbarModule,
+  MatFormFieldModule,
+  MatSelectModule,
+  MatOptionModule,
+  MatCardModule,
+  MatListModule,
+} from '@angular/material';
+
 
 
 import { AppComponent } from './app.component';
@@ -34,7 +43,13 @@ import { AccountService } from './services/account.service';
 
     BrowserAnimationsModule,
     NoopAnimationsModule,
-    MatButtonModule, MatToolbarModule, MatFormFieldModule, MatSelectModule, MatOptionModule, MatCardModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatCardModule,
+    MatListModule,
   ],
   providers: [AccountService],
   bootstrap: [AppComponent]

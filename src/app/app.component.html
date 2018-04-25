@@ -2,7 +2,7 @@
   <div class="row middle-xs" style="width: 100%">
     <span class="col-xs-12
                  col-sm-8">
-      Welcome to our awsome who is nearest game!
+      Welcome to our awsome who is nearest game! {{gameId}} 
     </span>
     <div class="col-xs-12
                 col-sm-4
@@ -17,10 +17,16 @@
   <span class="not-logged-in">Can't play when not logged in!</span>
 </mat-card>
 
+
+<mat-card>
+    <button mat-raised-button color="primary" (click)="create()">Create new game</button>  
+    <app-games [games]="games$ | async"></app-games>
+  </mat-card>
+
 <mat-card>
   <mat-toolbar>
     <i class="far fa-clock" style="margin-right: 10px"></i>
-    <span>Time until next winner: {{ (game$ | async)?.secondsLeftUntilNextRaffle }}</span>
+    <span>Time until next winner: {{ (game$ | async)?.createDate | date }}</span>
   </mat-toolbar>
 </mat-card>
 

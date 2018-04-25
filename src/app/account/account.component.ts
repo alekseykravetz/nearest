@@ -17,6 +17,7 @@ export class AccountComponent {
   user: User;
   constructor(
     private authService: AngularFireAuth) {
+
     this.authService.authState.subscribe(state => {
       this.user = state;
     });

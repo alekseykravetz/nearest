@@ -1,6 +1,13 @@
 export interface IGame {
-    secondsLeftUntilNextRaffle: number;
-    // submitions: ISubmition[];
+    id: string;
+    createDate: Date;
+    endDate: Date;
+    isEnded: boolean;
+    numberToGuess?: number;
+    winner: {
+        name: string;
+        guessedValue: number;
+    };
 }
 
 

@@ -24,12 +24,14 @@ import {
 
 import { AppComponent } from './app.component';
 import { AccountComponent } from './account/account.component';
+import { GamesComponent } from './games/games.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AccountComponent,
+    GamesComponent,
   ],
   imports: [
     BrowserModule,

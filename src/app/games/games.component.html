@@ -1,7 +1,5 @@
 <mat-list>
   <mat-list-item *ngFor="let game of games; trackBy: trackById">
-    <button mat-raised-button color="primary" color="primary">
-      Join {{game.id}}
-    </button> 
+      <a routerLink="/games/{{game.id}}">{{game.title}} - {{game.createDate | date}}</a>
   </mat-list-item>
 </mat-list>

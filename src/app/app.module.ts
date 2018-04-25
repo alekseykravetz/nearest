@@ -18,6 +18,7 @@ import {
   MatOptionModule,
   MatCardModule,
   MatListModule,
+  MatInputModule,
 } from '@angular/material';
 
 
@@ -25,6 +26,10 @@ import {
 import { AppComponent } from './app.component';
 import { AccountComponent } from './account/account.component';
 import { GamesComponent } from './games/games.component';
+import { GameComponent } from './game/game.component';
+import { HomeComponent } from './home/home.component';
+import { AppRoutingModule } from './app.routing';
+
 
 
 @NgModule({
@@ -32,16 +37,17 @@ import { GamesComponent } from './games/games.component';
     AppComponent,
     AccountComponent,
     GamesComponent,
+    GameComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-
+    AppRoutingModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
     MatButtonModule,
@@ -51,6 +57,7 @@ import { GamesComponent } from './games/games.component';
     MatOptionModule,
     MatCardModule,
     MatListModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

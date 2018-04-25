@@ -2,7 +2,7 @@
   <div class="row middle-xs" style="width: 100%">
     <span class="col-xs-12
                  col-sm-8">
-      Welcome to our awsome who is nearest game! {{gameId}} 
+      Welcome to our awsome who is nearest game!
     </span>
     <div class="col-xs-12
                 col-sm-4
@@ -13,46 +13,5 @@
   </div>
 </mat-toolbar>
 
-<mat-card *ngIf="!user">
-  <span class="not-logged-in">Can't play when not logged in!</span>
-</mat-card>
+<router-outlet></router-outlet>
 
-
-<mat-card>
-    <button mat-raised-button color="primary" (click)="create()">Create new game</button>  
-    <app-games [games]="games$ | async"></app-games>
-  </mat-card>
-
-<mat-card>
-  <mat-toolbar>
-    <i class="far fa-clock" style="margin-right: 10px"></i>
-    <span>Time until next winner: {{ (game$ | async)?.createDate | date }}</span>
-  </mat-toolbar>
-</mat-card>
-
-
-
-<mat-card *ngIf="user">
-  <mat-card-subtitle>
-    <h3>Choose 1-100</h3>
-  </mat-card-subtitle>
-  <img mat-card-image>
-  <mat-form-field>
-    <mat-select placeholder="Select your guess" [(ngModel)]="selected">
-      <mat-option *ngFor="let number of numbers" [value]="number">
-        {{ number }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <div>
-    <button mat-raised-button color="primary" (click)="submit()">submit your guess</button>
-  </div>
-
-</mat-card>
-
-<h2>Submitions: </h2>
-<mat-list>
-  <mat-list-item *ngFor="let submition of submitions$ | async">
-    {{submition.userDisplayName}}: {{submition.value}}
-  </mat-list-item>
-</mat-list>

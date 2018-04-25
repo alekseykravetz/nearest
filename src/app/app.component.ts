@@ -1,4 +1,3 @@
-import { AccountService } from './services/account.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -21,11 +20,14 @@ export class AppComponent implements OnInit {
   selected: number;
   game$: Observable<IGame>;
   submitions$: Observable<ISubmition[]>;
+  user: User;
 
   constructor(
     private db: AngularFirestore,
-    private accountService: AccountService) {
-
+    public authService: AngularFireAuth) {
+    this.authService.authState.subscribe(state => {
+      this.user = state;
+    });
   }
 
   ngOnInit(): void {
@@ -36,7 +38,8 @@ export class AppComponent implements OnInit {
 
   submit() {
     this.db.collection('games').doc<IGame>('testGame').collection<ISubmition>('submitions').add({
-      userDisplayName: this.accountService.user.displayName,
+      userDisplayName: this.user.displayName,
+      userId: this.user.uid,
       value: this.selected
     } as ISubmition);
   }

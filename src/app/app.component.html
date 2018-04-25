@@ -13,6 +13,10 @@
   </div>
 </mat-toolbar>
 
+<mat-card *ngIf="!user">
+  <span class="not-logged-in">Can't play when not logged in!</span>
+</mat-card>
+
 <mat-card>
   <mat-toolbar>
     <i class="far fa-clock" style="margin-right: 10px"></i>
@@ -20,7 +24,9 @@
   </mat-toolbar>
 </mat-card>
 
-<mat-card>
+
+
+<mat-card *ngIf="user">
   <mat-card-subtitle>
     <h3>Choose 1-100</h3>
   </mat-card-subtitle>

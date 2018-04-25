@@ -1,5 +1,12 @@
+
 import { Component } from '@angular/core';
-import { AccountService } from '../services/account.service';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { User } from '@firebase/auth-types';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import * as firebase from 'firebase/app';
+
+
 
 @Component({
   selector: 'app-account',
@@ -7,17 +14,20 @@ import { AccountService } from '../services/account.service';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent {
-
+  user: User;
   constructor(
-    public accountService: AccountService) {
+    private authService: AngularFireAuth) {
+    this.authService.authState.subscribe(state => {
+      this.user = state;
+    });
   }
 
   doLogin() {
-    this.accountService.login();
+    this.authService.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
 
   doLogout() {
-    this.accountService.logout();
+    this.authService.auth.signOut();
   }
 
 }

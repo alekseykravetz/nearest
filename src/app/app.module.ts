@@ -24,7 +24,6 @@ import {
 
 import { AppComponent } from './app.component';
 import { AccountComponent } from './account/account.component';
-import { AccountService } from './services/account.service';
 
 
 @NgModule({
@@ -51,7 +50,7 @@ import { AccountService } from './services/account.service';
     MatCardModule,
     MatListModule,
   ],
-  providers: [AccountService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

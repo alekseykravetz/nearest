@@ -19,6 +19,7 @@ import {
   MatCardModule,
   MatListModule,
   MatInputModule,
+  MatSliderModule,
 } from '@angular/material';
 
 
@@ -29,6 +30,7 @@ import { GamesComponent } from './games/games.component';
 import { GameComponent } from './game/game.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app.routing';
+import { GameSubmitionsComponent } from './game-submitions/game-submitions.component';
 
 
 
@@ -39,6 +41,7 @@ import { AppRoutingModule } from './app.routing';
     GamesComponent,
     GameComponent,
     HomeComponent,
+    GameSubmitionsComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +61,7 @@ import { AppRoutingModule } from './app.routing';
     MatCardModule,
     MatListModule,
     MatInputModule,
+    MatSliderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

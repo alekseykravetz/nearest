@@ -16,11 +16,11 @@ import { ISubmition } from '../models/submition';
 })
 export class GameComponent implements OnInit {
 
-  game$: Observable<IGame>;
+  game: IGame;
   submitions$: Observable<ISubmition[]>;
   numbers: number[];
   user: User;
-  selected: number;
+  selected = 1;
   submitted = false;
 
   private gameId: string;
@@ -41,9 +41,11 @@ export class GameComponent implements OnInit {
     this.gameId = this.router.snapshot.params.id;
 
     if (this.gameId) {
-      this.game$ = this.db.doc<IGame>('games/' + this.gameId).valueChanges();
-      this.submitions$ = this.db.collection<ISubmition>('games/' + this.gameId + '/submitions').valueChanges();
+      this.db.doc<IGame>('games/' + this.gameId).valueChanges().subscribe(game => {
+        this.game = game;
+      });
 
+      this.submitions$ = this.db.collection<ISubmition>('games/' + this.gameId + '/submitions').valueChanges();
     }
   }
 
@@ -53,6 +55,7 @@ export class GameComponent implements OnInit {
       userId: this.user.uid,
       value: this.selected
     } as ISubmition);
+
     this.submitted = true;
   }
 

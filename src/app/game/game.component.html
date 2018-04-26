@@ -1,47 +1,47 @@
 <mat-card>
-  <mat-toolbar>
-    <span>Game: {{(game$ | async)?.title}}</span>
-  </mat-toolbar>
+  <mat-card-title>
+    Game: {{ game?.title | uppercase }}
+  </mat-card-title>
+
   <mat-toolbar>
     <i class="far fa-clock" style="margin-right: 10px"></i>
-    <span>Time until next winner: {{ (game$ | async)?.createDate | date }}</span>
+    <span>{{ game?.createDate | date:'h:mm:ss' }}</span>
   </mat-toolbar>
 </mat-card>
 
-<mat-card *ngIf="user">
-  <mat-card-subtitle>
-    <h3>Choose 1-100</h3>
-  </mat-card-subtitle>
-  <img mat-card-image>
-  <mat-form-field>
-    <mat-select placeholder="Select your guess" [(ngModel)]="selected">
-      <mat-option *ngFor="let number of numbers" [value]="number">
-        {{ number }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <div>
-    <button mat-raised-button color="primary" [disabled]="submitted" (click)="submit()">
-      submit your guess
-    </button>
-  </div>
-  <div>
-    <button mat-raised-button color="secondary" (click)="goBack()">
-      Back
-    </button>
+
+<mat-card *ngIf="user && !submitted">
+  <mat-card-title>Choose 1-100</mat-card-title>
+
+  <mat-slider min="1" max="100" tickInterval="auto" [(ngModel)]="selected" thumbLabel="true"></mat-slider>
+  {{selected}}
+
+  <div class="row">
+    <div>
+      <button mat-raised-button color="primary" [disabled]="submitted" (click)="submit()">
+        submit your guess
+      </button>
+    </div>
+    <div>
+      <button mat-raised-button color="secondary" (click)="goBack()">
+        Back
+      </button>
+    </div>
   </div>
 </mat-card>
 
+<mat-card *ngIf="submitted">
+  <h1>Your guess: {{ selected }}</h1>
+</mat-card>
 
-<mat-card>
-    <mat-toolbar>
-      <span>Winner: {{(game$ | async)?.winner?.name}}</span>
-    </mat-toolbar>
-  </mat-card>
 
-<h2>Submitions: </h2>
-  <mat-list>
-    <mat-list-item *ngFor="let submition of submitions$ | async">
-      {{submition.userDisplayName}}: {{submition.value}}
-    </mat-list-item>
-  </mat-list>
+<mat-card *ngIf="game?.winner">
+  <mat-toolbar color="accent">
+    <h3>Game Number: {{ game.winner.guessedValue }}</h3>
+  </mat-toolbar>
+  <mat-toolbar color="accent">
+    <span>Winner: {{ game.winner.name }}</span>
+  </mat-toolbar>
+</mat-card>
+
+<app-game-submitions *ngIf="submitted" [submitions]="submitions$ | async"></app-game-submitions>

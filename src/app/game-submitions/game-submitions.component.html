@@ -1,0 +1,10 @@
+<mat-card>
+  <mat-card-title>
+      Submitions: 
+  </mat-card-title>
+  <mat-list>
+    <mat-list-item *ngFor="let submition of submitions">
+      {{submition.userDisplayName}}: {{submition.value}}
+    </mat-list-item>
+  </mat-list>
+</mat-card>

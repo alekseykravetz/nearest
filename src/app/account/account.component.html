@@ -1,10 +1,12 @@
 <div *ngIf="!user">
-  <button mat-button color="secondary" *ngIf="!user" (click)="doLogin()">Login</button>
+  <button mat-button color="secondary" *ngIf="!user" (click)="doLogin()">
+      <i class="fas fa-sign-in-alt fa-2x"> Login</i>     
+  </button>
 </div>
 <div *ngIf="user" style="display: flex;">
   <span>{{user.displayName}}</span>
   <img class="user-image" [src]="user.photoURL" width="32" height="32" />
   <button mat-button color="secondary" (click)="doLogout()">
-      <i class="fas fa-sign-out-alt fa-2x"> Logout</i> 
+      <i class="fas fa-sign-out-alt fa-2x"></i> 
   </button>
 </div>

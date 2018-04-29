@@ -7,7 +7,6 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { IGame } from './models/game';
 import { ISubmition } from './models/submition';
-import { get1to100array } from './helpers/one-to-one-hundred.helper';
 
 @Component({
   selector: 'app-root',

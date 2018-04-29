@@ -5,3 +5,7 @@ button {
 mat-slider {
     min-width: 200px;
 }
+
+.user-image {
+    border-radius: 50%;
+}

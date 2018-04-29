@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Component, OnInit, Input } from '@angular/core';
 import { IGame } from '../models/game';
@@ -17,7 +18,9 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private db: AngularFirestore,
-    public authService: AngularFireAuth) {
+    public authService: AngularFireAuth,
+    private router: Router) {
+
     this.authService.authState.subscribe(state => {
       this.user = state;
     });
@@ -29,7 +32,10 @@ export class HomeComponent implements OnInit {
   }
 
   create() {
-    this.db.collection('games').add({ title: this.title });
+    const gameId = this.db.createId();
+    this.db.collection('games').doc(gameId).set({ title: this.title });
     this.title = null;
+
+    this.router.navigate(['/games/' + gameId]);
   }
 }

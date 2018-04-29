@@ -1,3 +1,7 @@
+<button mat-button color="secondary" (click)="goBack()"> Back
+  <i class="fas fa-backward"></i>
+</button>
+
 <mat-card>
   <mat-card-title>
     Game: {{ game?.title | uppercase }}
@@ -10,38 +14,31 @@
 </mat-card>
 
 
-<mat-card *ngIf="user && !submitted">
+<mat-card *ngIf="user && !userSubmition.value">
   <mat-card-title>Choose 1-100</mat-card-title>
-
   <mat-slider min="1" max="100" tickInterval="auto" [(ngModel)]="selected" thumbLabel="true"></mat-slider>
   {{selected}}
-
-  <div class="row">
-    <div>
-      <button mat-raised-button color="primary" [disabled]="submitted" (click)="submit()">
-        submit your guess
-      </button>
-    </div>
-    <div>
-      <button mat-raised-button color="secondary" (click)="goBack()">
-        Back
-      </button>
-    </div>
+  <div>
+    <button mat-raised-button color="primary" [disabled]="userSubmition.value" (click)="submit()">
+      submit your guess
+    </button>
   </div>
 </mat-card>
 
-<mat-card *ngIf="submitted">
-  <h1>Your guess: {{ selected }}</h1>
+<mat-card *ngIf="userSubmition.value">
+  <h1>Your guess: {{ userSubmition.value }}</h1>
 </mat-card>
 
 
 <mat-card *ngIf="game?.winner">
+
   <mat-toolbar color="accent">
-    <h3>Game Number: {{ game.winner.guessedValue }}</h3>
+    <h3>Game Number: {{ game.numberToGuess }}</h3>
   </mat-toolbar>
   <mat-toolbar color="accent">
-    <span>Winner: {{ game.winner.name }}</span>
+    <span>Winner: {{ game.winner.userDisplayName }}</span>
+    <img class="user-image" [src]="game.winner?.photoURL" width="64" height="64" />    
   </mat-toolbar>
 </mat-card>
 
-<app-game-submitions *ngIf="submitted" [submitions]="submitions$ | async"></app-game-submitions>
+<app-game-submitions *ngIf="userSubmition.value" [submitions]="submitions$ | async"></app-game-submitions>

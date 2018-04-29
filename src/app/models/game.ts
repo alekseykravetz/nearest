@@ -1,3 +1,4 @@
+import { ISubmition } from './submition';
 export interface IGame {
     id: string;
     title: string;
@@ -5,10 +6,7 @@ export interface IGame {
     endDate: Date;
     isEnded: boolean;
     numberToGuess?: number;
-    winner: {
-        name: string;
-        guessedValue: number;
-    };
+    winner: ISubmition;
 }
 
 

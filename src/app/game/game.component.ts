@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { IGame } from '../models/game';
-import { get1to100array } from '../helpers/one-to-one-hundred.helper';
 import { ISubmition } from '../models/submition';
 
 @Component({
@@ -18,10 +17,14 @@ export class GameComponent implements OnInit {
 
   game: IGame;
   submitions$: Observable<ISubmition[]>;
-  numbers: number[];
+  selected: number;
   user: User;
-  selected = 1;
-  submitted = false;
+  userSubmition: ISubmition = {
+    userDisplayName: null,
+    userId: null,
+    photoURL: null,
+    value: null,
+  };
 
   private gameId: string;
 
@@ -31,32 +34,43 @@ export class GameComponent implements OnInit {
     private authService: AngularFireAuth,
     private location: Location) {
 
-    this.numbers = get1to100array();
     this.authService.authState.subscribe(state => {
       this.user = state;
+      this.userSubmition.userId = state.uid;
+      this.userSubmition.userDisplayName = state.displayName;
+      this.userSubmition.photoURL = state.photoURL;
+      if (this.user) {
+        this.getUserSubmitio();
+      }
     });
   }
 
   ngOnInit() {
     this.gameId = this.router.snapshot.params.id;
-
     if (this.gameId) {
       this.db.doc<IGame>('games/' + this.gameId).valueChanges().subscribe(game => {
         this.game = game;
       });
-
       this.submitions$ = this.db.collection<ISubmition>('games/' + this.gameId + '/submitions').valueChanges();
+
+      if (this.user) {
+        this.getUserSubmitio();
+      }
     }
   }
 
-  submit() {
-    this.db.collection('games').doc<IGame>(this.gameId).collection<ISubmition>('submitions').add({
-      userDisplayName: this.user.displayName,
-      userId: this.user.uid,
-      value: this.selected
-    } as ISubmition);
+  private getUserSubmitio() {
+    this.db.collection<ISubmition>('games/' + this.gameId + '/submitions', ref => ref.where('userId', '==', this.user.uid))
+      .valueChanges().subscribe(sub => {
+        if (sub[0]) {
+          this.userSubmition = sub[0];
+        }
+      });
+  }
 
-    this.submitted = true;
+  submit() {
+    this.userSubmition.value = this.selected;
+    this.db.collection('games').doc<IGame>(this.gameId).collection<ISubmition>('submitions').add(this.userSubmition);
   }
 
   goBack(): void {

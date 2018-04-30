@@ -15,9 +15,9 @@ import { ISubmition } from '../models/submition';
 })
 export class GameComponent implements OnInit {
 
+  private gameId: string;
   game: IGame;
   submitions$: Observable<ISubmition[]>;
-  selected: number;
   user: User;
   userSubmition: ISubmition = {
     userDisplayName: null,
@@ -25,8 +25,6 @@ export class GameComponent implements OnInit {
     photoURL: null,
     value: null,
   };
-
-  private gameId: string;
 
   constructor(
     private router: ActivatedRoute,
@@ -68,8 +66,8 @@ export class GameComponent implements OnInit {
       });
   }
 
-  submit() {
-    this.userSubmition.value = this.selected;
+  guessSelected(selected: number) {
+    this.userSubmition.value = selected;
     this.db.collection('games').doc<IGame>(this.gameId).collection<ISubmition>('submitions').add(this.userSubmition);
   }
 

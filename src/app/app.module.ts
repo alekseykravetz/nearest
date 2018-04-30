@@ -21,6 +21,7 @@ import {
   MatInputModule,
   MatSliderModule,
   MatProgressSpinnerModule,
+  MatProgressBarModule,
 } from '@angular/material';
 
 
@@ -33,6 +34,7 @@ import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app.routing';
 import { GameSubmitionsComponent } from './game-submitions/game-submitions.component';
 import { GameWinnerComponent } from './game-winner/game-winner.component';
+import { GuessSelectorComponent } from './guess-selector/guess-selector.component';
 
 
 
@@ -45,6 +47,7 @@ import { GameWinnerComponent } from './game-winner/game-winner.component';
     HomeComponent,
     GameSubmitionsComponent,
     GameWinnerComponent,
+    GuessSelectorComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +69,7 @@ import { GameWinnerComponent } from './game-winner/game-winner.component';
     MatInputModule,
     MatSliderModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

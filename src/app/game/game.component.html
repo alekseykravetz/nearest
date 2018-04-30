@@ -1,4 +1,3 @@
-<!-- <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner> -->
 
 
 <button mat-button color="secondary" (click)="goBack()"> Back
@@ -10,23 +9,18 @@
     Game: {{ game?.title | uppercase }}
   </mat-card-title>
 
-  <mat-toolbar>
+  <mat-progress-bar *ngIf="!game?.createDate" mode="indeterminate"></mat-progress-bar>
+  <mat-toolbar *ngIf="game?.createDate">
     <i class="far fa-clock" style="margin-right: 10px"></i>
     <span>{{ game?.createDate | date:'h:mm:ss' }}</span>
   </mat-toolbar>
 </mat-card>
 
 
-<mat-card *ngIf="user && !userSubmition.value">
-  <mat-card-title>Choose 1-100</mat-card-title>
-  <mat-slider min="1" max="100" tickInterval="auto" [(ngModel)]="selected" thumbLabel="true"></mat-slider>
-  {{selected}}
-  <div>
-    <button mat-raised-button color="primary" [disabled]="userSubmition.value" (click)="submit()">
-      submit your guess
-    </button>
-  </div>
-</mat-card>
+<app-guess-selector *ngIf="user && !userSubmition.value" 
+                    [submitDisabled]="userSubmition.value" 
+                    (guessSubmitted)="guessSelected($event)">
+</app-guess-selector>
 
 <mat-card *ngIf="userSubmition.value">
   <h1>Your guess: {{ userSubmition.value }}</h1>

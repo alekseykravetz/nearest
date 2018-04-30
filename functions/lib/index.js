@@ -7,16 +7,22 @@ const game_engine_1 = require("./game-engine");
 // https://firebase.google.com/docs/functions/typescript
 admin.initializeApp();
 exports.gameCreated = functions.firestore.document('games/{gameId}').onCreate(snap => {
-    const snapData = snap.data();
-    const objToUpdate = Object.assign(snapData, {
+    const game = Object.assign(snap.data(), {
         createDate: Date(),
         isEnded: false,
         id: snap.ref.id
     });
-    const gameEngine = new game_engine_1.GameEngine(snap.ref.id);
-    admin.firestore().doc('games/' + snap.ref.id).set(objToUpdate);
-    setTimeout(() => {
-        gameEngine.endGame();
-    }, 60000);
+    const gameDocRef = admin.firestore().doc('games/' + snap.ref.id);
+    gameDocRef.set(game);
+    let timerInterval;
+    let timeLeftInSeconds = 60;
+    timerInterval = setInterval(() => {
+        timeLeftInSeconds--;
+        gameDocRef.set({ timeLeftInSeconds: timeLeftInSeconds }, { merge: true });
+        if (timeLeftInSeconds <= 0) {
+            new game_engine_1.GameEngine(snap.ref.id).endGame();
+            clearInterval(timerInterval);
+        }
+    }, 1000);
 });
 //# sourceMappingURL=index.js.map

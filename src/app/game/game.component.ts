@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { IGame } from '../models/game';
 import { ISubmition } from '../models/submition';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-game',
@@ -38,7 +39,7 @@ export class GameComponent implements OnInit {
       this.userSubmition.userDisplayName = state.displayName;
       this.userSubmition.photoURL = state.photoURL;
       if (this.user) {
-        this.getUserSubmitio();
+        this.getUserSubmition();
       }
     });
   }
@@ -49,15 +50,16 @@ export class GameComponent implements OnInit {
       this.db.doc<IGame>('games/' + this.gameId).valueChanges().subscribe(game => {
         this.game = game;
       });
+
       this.submitions$ = this.db.collection<ISubmition>('games/' + this.gameId + '/submitions').valueChanges();
 
       if (this.user) {
-        this.getUserSubmitio();
+        this.getUserSubmition();
       }
     }
   }
 
-  private getUserSubmitio() {
+  private getUserSubmition() {
     this.db.collection<ISubmition>('games/' + this.gameId + '/submitions', ref => ref.where('userId', '==', this.user.uid))
       .valueChanges().subscribe(sub => {
         if (sub[0]) {

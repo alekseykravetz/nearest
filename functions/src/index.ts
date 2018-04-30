@@ -10,19 +10,26 @@ import { GameEngine } from './game-engine';
 admin.initializeApp();
 
 export const gameCreated = functions.firestore.document('games/{gameId}').onCreate(snap => {
-    const snapData = snap.data();
-    const objToUpdate = Object.assign(snapData, {
+    const game = Object.assign(snap.data(), {
         createDate: Date(),
         isEnded: false,
         id: snap.ref.id
     });
 
-    const gameEngine = new GameEngine(snap.ref.id);
+    const gameDocRef = admin.firestore().doc('games/' + snap.ref.id);
 
-    admin.firestore().doc('games/' + snap.ref.id).set(objToUpdate);
-    setTimeout(() => {
-        gameEngine.endGame();
-    }, 60000)
+    gameDocRef.set(game);
+
+    let timerInterval: any;    
+    let timeLeftInSeconds = 60;
+    timerInterval = setInterval(() => {
+        timeLeftInSeconds--;
+        gameDocRef.set({ timeLeftInSeconds: timeLeftInSeconds }, { merge: true });
+        if (timeLeftInSeconds <= 0) {
+            new GameEngine(snap.ref.id).endGame();
+            clearInterval(timerInterval);
+        }
+    }, 1000);
 });
 
 

@@ -12,7 +12,7 @@
   <mat-progress-bar *ngIf="!game?.createDate" mode="indeterminate"></mat-progress-bar>
   <mat-toolbar *ngIf="game?.createDate">
     <i class="far fa-clock" style="margin-right: 10px"></i>
-    <span>{{ game?.createDate | date:'h:mm:ss' }}</span>
+    <span>Game ends in {{ game?.timeLeftInSeconds }} seconds</span>
   </mat-toolbar>
 </mat-card>
 

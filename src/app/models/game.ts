@@ -7,6 +7,7 @@ export interface IGame {
     isEnded: boolean;
     numberToGuess?: number;
     winner: ISubmition;
+    timeLeftInSeconds: number;
 }
 
 

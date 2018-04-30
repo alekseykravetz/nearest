@@ -17,7 +17,7 @@ class GameEngine {
                 winner: winner
             }, { merge: true })
                 .then(doc => {
-                console.log('game ended' + doc);
+                console.log('game ended: ' + this.gameId);
             })
                 .catch(err => {
                 console.log(err);
@@ -30,20 +30,25 @@ class GameEngine {
         return admin.firestore().collection('games/' + this.gameId + '/submitions').get()
             .then(submitionsSnap => {
             let winnerSubmition;
-            submitionsSnap.forEach(submitionSnap => {
-                const submition = submitionSnap.data();
-                if (!winnerSubmition) {
-                    winnerSubmition = submition;
-                }
-                else {
-                    const nearstDiff = numberToGuess - winnerSubmition.value;
-                    const nextDiff = numberToGuess - submition.value;
-                    if (Math.abs(nextDiff) < Math.abs(nearstDiff)) {
+            if (submitionsSnap && submitionsSnap.docs.length > 0) {
+                submitionsSnap.forEach(submitionSnap => {
+                    const submition = submitionSnap.data();
+                    if (!winnerSubmition) {
                         winnerSubmition = submition;
                     }
-                }
-            });
-            return Promise.resolve(winnerSubmition);
+                    else {
+                        const nearstDiff = numberToGuess - winnerSubmition.value;
+                        const nextDiff = numberToGuess - submition.value;
+                        if (Math.abs(nextDiff) < Math.abs(nearstDiff)) {
+                            winnerSubmition = submition;
+                        }
+                    }
+                });
+                return Promise.resolve(winnerSubmition);
+            }
+            else {
+                return Promise.resolve(null);
+            }
         }).catch(err => {
             return Promise.reject(err);
         });

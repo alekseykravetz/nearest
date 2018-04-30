@@ -1,3 +1,6 @@
+<!-- <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner> -->
+
+
 <button mat-button color="secondary" (click)="goBack()"> Back
   <i class="fas fa-backward"></i>
 </button>
@@ -37,7 +40,7 @@
   </mat-toolbar>
   <mat-toolbar color="accent">
     <span>Winner: {{ game.winner.userDisplayName }}</span>
-    <img class="user-image" [src]="game.winner?.photoURL" width="64" height="64" />    
+    <img class="user-image" [src]="game.winner?.photoURL" width="64" height="64" />
   </mat-toolbar>
 </mat-card>
 

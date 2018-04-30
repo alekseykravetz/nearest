@@ -20,6 +20,7 @@ import {
   MatListModule,
   MatInputModule,
   MatSliderModule,
+  MatProgressSpinnerModule,
 } from '@angular/material';
 
 
@@ -62,6 +63,7 @@ import { GameSubmitionsComponent } from './game-submitions/game-submitions.compo
     MatListModule,
     MatInputModule,
     MatSliderModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

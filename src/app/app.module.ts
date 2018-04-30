@@ -32,6 +32,7 @@ import { GameComponent } from './game/game.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app.routing';
 import { GameSubmitionsComponent } from './game-submitions/game-submitions.component';
+import { GameWinnerComponent } from './game-winner/game-winner.component';
 
 
 
@@ -43,6 +44,7 @@ import { GameSubmitionsComponent } from './game-submitions/game-submitions.compo
     GameComponent,
     HomeComponent,
     GameSubmitionsComponent,
+    GameWinnerComponent,
   ],
   imports: [
     BrowserModule,

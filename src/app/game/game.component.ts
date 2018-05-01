@@ -1,3 +1,4 @@
+import { DataService } from './../srvices/data.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FirebaseAuth, User } from '@firebase/auth-types';
 import { Observable } from 'rxjs/Observable';
@@ -31,9 +32,11 @@ export class GameComponent implements OnInit {
     private router: ActivatedRoute,
     private db: AngularFirestore,
     private authService: AngularFireAuth,
-    private location: Location) {
+    private location: Location,
+    private dataService: DataService) {
 
     this.authService.authState.subscribe(state => {
+      console.log('GameComponent.authService.authState.subscribe()');
       this.user = state;
       this.userSubmition.userId = state.uid;
       this.userSubmition.userDisplayName = state.displayName;
@@ -47,11 +50,12 @@ export class GameComponent implements OnInit {
   ngOnInit() {
     this.gameId = this.router.snapshot.params.id;
     if (this.gameId) {
-      this.db.doc<IGame>('games/' + this.gameId).valueChanges().subscribe(game => {
+      this.dataService.getGameDocRef(this.gameId).valueChanges().subscribe(game => {
+        console.log('GameComponent.authService.authState.subscribe()');
         this.game = game;
       });
 
-      this.submitions$ = this.db.collection<ISubmition>('games/' + this.gameId + '/submitions').valueChanges();
+      this.submitions$ = this.dataService.getGameSubmitionsCollectionRef(this.gameId).valueChanges();
 
       if (this.user) {
         this.getUserSubmition();
@@ -60,17 +64,17 @@ export class GameComponent implements OnInit {
   }
 
   private getUserSubmition() {
-    this.db.collection<ISubmition>('games/' + this.gameId + '/submitions', ref => ref.where('userId', '==', this.user.uid))
-      .valueChanges().subscribe(sub => {
-        if (sub[0]) {
-          this.userSubmition = sub[0];
-        }
-      });
+
+    this.dataService.getGameUserSubmitionCollectionRef(this.gameId, this.user.uid).valueChanges().subscribe(sub => {
+      if (sub[0]) {
+        this.userSubmition = sub[0];
+      }
+    });
   }
 
   guessSelected(selected: number) {
     this.userSubmition.value = selected;
-    this.db.collection('games').doc<IGame>(this.gameId).collection<ISubmition>('submitions').add(this.userSubmition);
+    this.dataService.getGameSubmitionsCollectionRef(this.gameId).add(this.userSubmition);
   }
 
   goBack(): void {

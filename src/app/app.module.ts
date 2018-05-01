@@ -25,7 +25,7 @@ import {
 } from '@angular/material';
 
 
-
+import { DataService } from './srvices/data.service';
 import { AppComponent } from './app.component';
 import { AccountComponent } from './account/account.component';
 import { GamesComponent } from './games/games.component';
@@ -71,7 +71,7 @@ import { GuessSelectorComponent } from './guess-selector/guess-selector.componen
     MatProgressSpinnerModule,
     MatProgressBarModule,
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

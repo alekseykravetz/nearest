@@ -4,6 +4,8 @@
   </button>
 </div>
 <div *ngIf="user" style="display: flex;">
+  <span style="margin-right: 10px">Score: {{ (score$ | async)?.points }}</span>
+
   <span>{{user.displayName}}</span>
   <img class="user-image" [src]="user.photoURL" width="32" height="32" />
   <button mat-button color="secondary" (click)="doLogout()">

@@ -1,3 +1,5 @@
+import { IUserScore } from './../models/user-score';
+import { DataService } from './../srvices/data.service';
 import { Component } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from '@firebase/auth-types';
@@ -14,13 +16,20 @@ import * as firebase from 'firebase/app';
 export class AccountComponent {
 
   user: User;
+  score$: Observable<IUserScore>;
 
   constructor(
-    private authService: AngularFireAuth) {
+    private authService: AngularFireAuth,
+    private dataService: DataService) {
 
     this.authService.authState.subscribe(user => {
       this.user = user;
       console.log(this.user);
+
+      if (this.user !== null) {
+        this.score$ = dataService.getUserScoreDocRef(this.user.uid).valueChanges();
+      }
+
     });
   }
 

@@ -1,14 +1,15 @@
 <div *ngIf="!user">
   <button mat-button color="secondary" *ngIf="!user" (click)="doLogin()">
-      <i class="fas fa-sign-in-alt fa-2x"> Login</i>     
+    <i class="fas fa-sign-in-alt fa-2x"> Login</i>
   </button>
 </div>
-<div *ngIf="user" style="display: flex;">
-  <span style="margin-right: 10px">Score: {{ (score$ | async)?.points }}</span>
 
+<div *ngIf="user" class="main">
+  <span style="margin-right: 5px; color: yellow">{{ (score$ | async)?.points }}</span>
+  <i style="margin-right: 20px; color: yellow" class="fas fa-star"></i>
   <span>{{user.displayName}}</span>
   <img class="user-image" [src]="user.photoURL" width="32" height="32" />
   <button mat-button color="secondary" (click)="doLogout()">
-      <i class="fas fa-sign-out-alt fa-2x"></i> 
+    <i class="fas fa-sign-out-alt fa-2x"></i>
   </button>
 </div>

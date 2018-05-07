@@ -25,7 +25,6 @@ import {
 } from '@angular/material';
 
 
-import { DataService } from './srvices/data.service';
 import { AppComponent } from './app.component';
 import { AccountComponent } from './account/account.component';
 import { GamesComponent } from './games/games.component';
@@ -35,6 +34,9 @@ import { AppRoutingModule } from './app.routing';
 import { GameSubmitionsComponent } from './game-submitions/game-submitions.component';
 import { GameWinnerComponent } from './game-winner/game-winner.component';
 import { GuessSelectorComponent } from './guess-selector/guess-selector.component';
+import { DataService } from './services/data.service';
+import { AccountService } from './services/account.service';
+import { UserScoreComponent } from './user-score/user-score.component';
 
 
 
@@ -48,6 +50,7 @@ import { GuessSelectorComponent } from './guess-selector/guess-selector.componen
     GameSubmitionsComponent,
     GameWinnerComponent,
     GuessSelectorComponent,
+    UserScoreComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +74,7 @@ import { GuessSelectorComponent } from './guess-selector/guess-selector.componen
     MatProgressSpinnerModule,
     MatProgressBarModule,
   ],
-  providers: [DataService],
+  providers: [DataService, AccountService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

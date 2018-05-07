@@ -1,3 +1,4 @@
+import { AccountService } from './../services/account.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Component, OnInit, Input } from '@angular/core';
@@ -5,6 +6,7 @@ import { IGame } from '../models/game';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { User } from '@firebase/auth-types';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-home',
@@ -19,23 +21,18 @@ export class HomeComponent implements OnInit {
   constructor(
     private db: AngularFirestore,
     public authService: AngularFireAuth,
-    private router: Router) {
-
-    this.authService.authState.subscribe(state => {
-      this.user = state;
-    });
+    private router: Router,
+    private dataService: DataService,
+    public accountService: AccountService) {
   }
 
   ngOnInit() {
-    this.activeGames$ = this.db.collection<IGame>('games', ref =>
-      ref.where('isEnded', '==', false)).valueChanges();
+    this.activeGames$ = this.dataService.getActiveGamesCollectionRef().valueChanges();
   }
 
   create() {
-    const gameId = this.db.createId();
-    this.db.collection('games').doc(gameId).set({ title: this.title });
+    const gameId = this.dataService.addNewGame({ title: this.title } as IGame);
     this.title = null;
-
     this.router.navigate(['/games/' + gameId]);
   }
 }

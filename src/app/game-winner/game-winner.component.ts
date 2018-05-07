@@ -7,9 +7,5 @@ import { IGame } from '../models/game';
   styleUrls: ['./game-winner.component.css']
 })
 export class GameWinnerComponent {
-
   @Input() game: IGame;
-
-  constructor() { }
-
 }

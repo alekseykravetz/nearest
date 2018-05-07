@@ -1,8 +1,8 @@
-<mat-card *ngIf="!user">
+<mat-card *ngIf="!accountService.user">
   <span class="not-logged-in">Can't play when not logged in!</span>
 </mat-card>
 
-<mat-card *ngIf="user">
+<mat-card *ngIf="accountService.user">
   <mat-form-field>
     <input matInput placeholder="Game name" required [(ngModel)]="title">
   </mat-form-field>

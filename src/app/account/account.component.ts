@@ -1,46 +1,43 @@
-import { IUserScore } from './../models/user-score';
-import { DataService } from './../srvices/data.service';
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from '@firebase/auth-types';
-import { Observable } from 'rxjs/Observable';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import * as firebase from 'firebase/app';
-
+import { DataService } from '../services/data.service';
+import { AccountService } from './../services/account.service';
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css']
 })
-export class AccountComponent {
+export class AccountComponent implements OnDestroy {
 
   user: User;
-  score$: Observable<IUserScore>;
+  subscription: Subscription;
 
   constructor(
-    private authService: AngularFireAuth,
-    private dataService: DataService) {
+    private router: Router,
+    public accountService: AccountService) {
 
-    this.authService.authState.subscribe(user => {
+    this.subscription = this.accountService.user$.subscribe(user => {
       this.user = user;
-      console.log(this.user);
-
-      if (this.user !== null) {
-        this.score$ = dataService.getUserScoreDocRef(this.user.uid).valueChanges();
+      if (this.user === null) {
+        this.doLogout();
       }
-
     });
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   doLogin() {
-    console.log('AccountComponent.doLogin()');
-    this.authService.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    this.accountService.login();
   }
 
   doLogout() {
-    console.log('AccountComponent.doLogout()');
-    this.authService.auth.signOut();
+    this.accountService.logout();
+    this.router.navigate(['']);
   }
-
 }

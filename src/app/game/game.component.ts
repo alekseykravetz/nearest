@@ -1,13 +1,12 @@
-import { DataService } from './../srvices/data.service';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { FirebaseAuth, User } from '@firebase/auth-types';
-import { Observable } from 'rxjs/Observable';
-import { AngularFirestore } from 'angularfire2/firestore';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { User } from '@firebase/auth-types';
 import { IGame } from '../models/game';
 import { ISubmition } from '../models/submition';
+import { DataService } from '../services/data.service';
+import { AccountService } from '../services/account.service';
 import * as moment from 'moment';
 
 @Component({
@@ -17,64 +16,55 @@ import * as moment from 'moment';
 })
 export class GameComponent implements OnInit {
 
-  private gameId: string;
+  private navigatedGameId: string;
   game: IGame;
-  submitions$: Observable<ISubmition[]>;
-  user: User;
-  userSubmition: ISubmition = {
-    userDisplayName: null,
-    userId: null,
-    photoURL: null,
-    value: null,
-  };
+  userSubmition: ISubmition;
 
   constructor(
     private router: ActivatedRoute,
-    private db: AngularFirestore,
-    private authService: AngularFireAuth,
     private location: Location,
-    private dataService: DataService) {
-
-    this.authService.authState.subscribe(state => {
-      console.log('GameComponent.authService.authState.subscribe()');
-      this.user = state;
-      this.userSubmition.userId = state.uid;
-      this.userSubmition.userDisplayName = state.displayName;
-      this.userSubmition.photoURL = state.photoURL;
-      if (this.user) {
-        this.getUserSubmition();
-      }
-    });
+    private dataService: DataService,
+    public accountService: AccountService) {
   }
 
   ngOnInit() {
-    this.gameId = this.router.snapshot.params.id;
-    if (this.gameId) {
-      this.dataService.getGameDocRef(this.gameId).valueChanges().subscribe(game => {
-        console.log('GameComponent.authService.authState.subscribe()');
+    this.navigatedGameId = this.router.snapshot.params.id;
+    if (this.navigatedGameId) {
+      this.dataService.getGameDocRef(this.navigatedGameId).valueChanges().subscribe(game => {
         this.game = game;
       });
 
-      this.submitions$ = this.dataService.getGameSubmitionsCollectionRef(this.gameId).valueChanges();
-
-      if (this.user) {
+      if (this.accountService.user) {
         this.getUserSubmition();
+      } else {
+        this.accountService.user$.subscribe(user => {
+          if (user) {
+            this.getUserSubmition();
+          }
+        });
       }
     }
   }
 
   private getUserSubmition() {
-
-    this.dataService.getGameUserSubmitionCollectionRef(this.gameId, this.user.uid).valueChanges().subscribe(sub => {
-      if (sub[0]) {
+    this.dataService.getGameUserSubmitionCollectionRef(this.navigatedGameId, this.accountService.user.uid).valueChanges()
+      .subscribe(sub => {
         this.userSubmition = sub[0];
-      }
-    });
+      });
   }
 
   guessSelected(selected: number) {
-    this.userSubmition.value = selected;
-    this.dataService.getGameSubmitionsCollectionRef(this.gameId).add(this.userSubmition);
+    this.dataService.getGameSubmitionsCollectionRef(this.navigatedGameId)
+      .add({
+        userDisplayName: this.accountService.user.displayName,
+        userId: this.accountService.user.uid,
+        photoURL: this.accountService.user.photoURL,
+        value: selected,
+      });
+  }
+
+  userSubmitionChanged(userSubmition: ISubmition) {
+    this.userSubmition = userSubmition;
   }
 
   goBack(): void {

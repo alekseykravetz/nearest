@@ -18,16 +18,13 @@
 </mat-card>
 
 
-<app-guess-selector *ngIf="user && !userSubmition.value" 
-                    [submitDisabled]="userSubmition.value" 
-                    (guessSubmitted)="guessSelected($event)">
+<app-guess-selector *ngIf="!userSubmition" [submitDisabled]="userSubmition" (guessSubmitted)="guessSelected($event)">
 </app-guess-selector>
 
-<mat-card *ngIf="userSubmition.value" class="animated fadeIn 2s">
+<mat-card *ngIf="userSubmition" class="animated fadeIn 2s">
   <h1>Your guess: {{ userSubmition.value }}</h1>
 </mat-card>
 
-
 <app-game-winner [game]="game"></app-game-winner>
 
-<app-game-submitions *ngIf="userSubmition.value" [submitions]="submitions$ | async"></app-game-submitions>
+<app-game-submitions *ngIf="game && userSubmition" [gameId]="game?.id"></app-game-submitions>

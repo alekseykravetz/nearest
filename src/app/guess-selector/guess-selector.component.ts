@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-guess-selector',
@@ -11,10 +11,7 @@ export class GuessSelectorComponent {
   @Output() guessSubmitted = new EventEmitter<number>();
   @Input() submitDisabled: boolean;
 
-  constructor() { }
-
   submit() {
     this.guessSubmitted.emit(this.selected);
   }
-
 }

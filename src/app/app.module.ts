@@ -27,6 +27,7 @@ import {
 
 import { AppComponent } from './app.component';
 import { AccountComponent } from './account/account.component';
+import { UserScoreComponent } from './account/user-score.component';
 import { GamesComponent } from './games/games.component';
 import { GameComponent } from './game/game.component';
 import { HomeComponent } from './home/home.component';
@@ -36,7 +37,7 @@ import { GameWinnerComponent } from './game-winner/game-winner.component';
 import { GuessSelectorComponent } from './guess-selector/guess-selector.component';
 import { DataService } from './services/data.service';
 import { AccountService } from './services/account.service';
-import { UserScoreComponent } from './user-score/user-score.component';
+import {  } from './user-score/user-score.component';
 
 
 

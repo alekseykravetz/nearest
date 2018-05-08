@@ -1,9 +1,9 @@
-<mat-card *ngIf="game?.winner" class="animated 4s rubberBand">
+<mat-card *ngIf="game?.winner as winner" class="animated 4s rubberBand">
   <mat-toolbar color="accent">
     <h2>Winner:</h2>
   </mat-toolbar>
   <mat-toolbar color="accent" >
-    <span>{{ game.winner.userDisplayName }}</span>
-    <img class="user-image" [src]="game.winner?.photoURL" width="64" height="64" />
+    <span>{{ winner.userDisplayName }}</span>
+    <img class="user-image" [src]="winner.photoURL" width="64" height="64" />
   </mat-toolbar>
 </mat-card>

@@ -32,6 +32,8 @@ export class GameComponent implements OnInit {
     if (this.navigatedGameId) {
       this.dataService.getGameDocRef(this.navigatedGameId).valueChanges().subscribe(game => {
         this.game = game;
+
+        // this.startGameTimer();
       });
 
       if (this.accountService.user) {
@@ -44,6 +46,18 @@ export class GameComponent implements OnInit {
         });
       }
     }
+  }
+
+  private startGameTimer() {
+    const gameSeconds = this.game.createDate.getSeconds();
+
+    let timeLeftInSeconds = 60;
+    const timer = setInterval(() => {
+      timeLeftInSeconds--;
+      if (timeLeftInSeconds <= 0) {
+        clearInterval(timer);
+      }
+    }, 1000);
   }
 
   private getUserSubmition() {

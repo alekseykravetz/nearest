@@ -17,16 +17,10 @@ export class HomeComponent {
 
   user: User;
   title: string;
-
+  aaa: string;
   constructor(
     private router: Router,
     private dataService: DataService,
     public accountService: AccountService) {
-  }
-
-  create() {
-    const gameId = this.dataService.addNewGame({ title: this.title } as IGame);
-    this.title = null;
-    this.router.navigate(['/games/' + gameId]);
   }
 }

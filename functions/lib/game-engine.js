@@ -68,7 +68,9 @@ class GameEngine {
                     }
                 }
             });
-            winnerSubmition.points = submitionsSnap.size - 1;
+            if (winnerSubmition) {
+                winnerSubmition.points = submitionsSnap.size - 1;
+            }
             return Promise.resolve(winnerSubmition);
         })
             .catch(err => {

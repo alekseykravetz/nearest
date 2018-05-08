@@ -27,7 +27,7 @@ import {
 import { AppComponent } from './app.component';
 import { AccountComponent } from './account/account.component';
 import { UserScoreComponent } from './account/user-score/user-score.component';
-import { GamesComponent } from './home/games/games.component';
+import { ActiveGamesComponent } from './home/games/active-games.component';
 import { GameComponent } from './game/game.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app.routing';
@@ -43,7 +43,7 @@ import { GameCreatorComponent } from './home/game-creator/game-creator.component
   declarations: [
     AppComponent,
     AccountComponent,
-    GamesComponent,
+    ActiveGamesComponent,
     GameComponent,
     HomeComponent,
     SubmitionsComponent,

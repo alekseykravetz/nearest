@@ -18,7 +18,7 @@
 </mat-card>
 
 
-<app-game-guess-selector *ngIf="!userSubmition" [submitDisabled]="userSubmition" (guessSubmitted)="guessSelected($event)">
+<app-game-guess-selector *ngIf="!game?.isEnded && !userSubmition" [submitDisabled]="userSubmition" (guessSubmitted)="guessSelected($event)">
 </app-game-guess-selector>
 
 <mat-card *ngIf="userSubmition" class="animated fadeIn 2s">

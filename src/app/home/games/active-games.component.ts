@@ -6,14 +6,14 @@ import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs/Subscriber';
 
 @Component({
-  selector: 'app-home-games',
-  templateUrl: './games.component.html',
-  styleUrls: ['./games.component.css']
+  selector: 'app-home-active-games',
+  templateUrl: './active-games.component.html',
+  styleUrls: ['./active-games.component.css']
 })
-export class GamesComponent implements OnInit, OnDestroy {
+export class ActiveGamesComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
-  activeGames: IGame[];
+  games: IGame[];
 
   constructor(
     private dataService: DataService) {
@@ -21,7 +21,7 @@ export class GamesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.dataService.getActiveGamesCollectionRef().valueChanges().subscribe(activeGames => {
-      this.activeGames = activeGames;
+      this.games = activeGames;
     });
   }
 

@@ -4,4 +4,4 @@
 
 <app-home-game-creator *ngIf="accountService.user"></app-home-game-creator>
 
-<app-home-active-games></app-home-active-games>
+<app-home-active-games *ngIf="accountService.user"></app-home-active-games>

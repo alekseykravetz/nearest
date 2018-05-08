@@ -63,10 +63,6 @@ export class GameComponent implements OnInit {
       });
   }
 
-  userSubmitionChanged(userSubmition: ISubmition) {
-    this.userSubmition = userSubmition;
-  }
-
   goBack(): void {
     this.location.back();
   }

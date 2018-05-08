@@ -2,11 +2,6 @@
   <span class="not-logged-in">Can't play when not logged in!</span>
 </mat-card>
 
-<mat-card *ngIf="accountService.user">
-  <mat-form-field>
-    <input matInput placeholder="Game name" required [(ngModel)]="title">
-  </mat-form-field>
+<app-home-game-creator *ngIf="accountService.user"></app-home-game-creator>
 
-  <button mat-raised-button color="primary" [disabled]="!title" (click)="create()">Create</button>
-  <app-games [games]="activeGames$ | async"></app-games>
-</mat-card>
+<app-home-games></app-home-games>

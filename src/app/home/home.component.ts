@@ -13,21 +13,15 @@ import { DataService } from '../services/data.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
+
   user: User;
-  activeGames$: Observable<IGame[]>;
   title: string;
 
   constructor(
-    private db: AngularFirestore,
-    public authService: AngularFireAuth,
     private router: Router,
     private dataService: DataService,
     public accountService: AccountService) {
-  }
-
-  ngOnInit() {
-    this.activeGames$ = this.dataService.getActiveGamesCollectionRef().valueChanges();
   }
 
   create() {

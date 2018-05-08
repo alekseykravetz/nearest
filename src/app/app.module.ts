@@ -24,21 +24,19 @@ import {
   MatProgressBarModule,
 } from '@angular/material';
 
-
 import { AppComponent } from './app.component';
 import { AccountComponent } from './account/account.component';
-import { UserScoreComponent } from './account/user-score.component';
-import { GamesComponent } from './games/games.component';
+import { UserScoreComponent } from './account/user-score/user-score.component';
+import { GamesComponent } from './home/games/games.component';
 import { GameComponent } from './game/game.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app.routing';
-import { GameSubmitionsComponent } from './game-submitions/game-submitions.component';
-import { GameWinnerComponent } from './game-winner/game-winner.component';
-import { GuessSelectorComponent } from './guess-selector/guess-selector.component';
+import { SubmitionsComponent } from './game/submitions/submitions.component';
+import { WinnerComponent } from './game/winner/winner.component';
+import { GuessSelectorComponent } from './game/guess-selector/guess-selector.component';
 import { DataService } from './services/data.service';
 import { AccountService } from './services/account.service';
-import {  } from './user-score/user-score.component';
-
+import { GameCreatorComponent } from './home/game-creator/game-creator.component';
 
 
 @NgModule({
@@ -48,10 +46,11 @@ import {  } from './user-score/user-score.component';
     GamesComponent,
     GameComponent,
     HomeComponent,
-    GameSubmitionsComponent,
-    GameWinnerComponent,
+    SubmitionsComponent,
+    WinnerComponent,
     GuessSelectorComponent,
     UserScoreComponent,
+    GameCreatorComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ISubmition } from '../models/submition';
-import { DataService } from '../services/data.service';
+import { ISubmition } from '../../models/submition';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-game-submitions',
-  templateUrl: './game-submitions.component.html',
-  styleUrls: ['./game-submitions.component.css']
+  templateUrl: './submitions.component.html',
+  styleUrls: ['./submitions.component.css']
 })
-export class GameSubmitionsComponent implements OnInit {
+export class SubmitionsComponent implements OnInit {
 
   @Input() gameId: string;
   submitions: ISubmition[];

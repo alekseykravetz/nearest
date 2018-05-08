@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-guess-selector',
+  selector: 'app-game-guess-selector',
   templateUrl: './guess-selector.component.html',
   styleUrls: ['./guess-selector.component.css']
 })

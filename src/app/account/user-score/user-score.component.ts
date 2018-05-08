@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { IUserScore } from '../models/user-score';
-import { DataService } from '../services/data.service';
-import { AccountService } from '../services/account.service';
+import { IUserScore } from '../../models/user-score';
+import { DataService } from '../../services/data.service';
+import { AccountService } from '../../services/account.service';
 
 @Component({
-  selector: 'app-user-score',
+  selector: 'app-account-user-score',
   templateUrl: './user-score.component.html',
   styleUrls: ['./user-score.component.css']
 })

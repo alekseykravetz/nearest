@@ -1,0 +1,9 @@
+<mat-card>
+  <mat-form-field>
+    <input matInput placeholder="Game name" required [(ngModel)]="title">
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" [disabled]="!title" (click)="create()">Create</button>
+  <button mat-raised-button color="primary" (click)="quickStart()">Quick Start</button>
+  
+</mat-card>

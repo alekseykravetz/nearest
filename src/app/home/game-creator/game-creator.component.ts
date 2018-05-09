@@ -1,7 +1,4 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { DataService } from '../../services/data.service';
-import { IGame } from '../../models/game';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-home-game-creator',
@@ -10,21 +7,16 @@ import { IGame } from '../../models/game';
 })
 export class GameCreatorComponent {
 
+  @Output() createGame = new EventEmitter<string>();
+  @Output() quickStartGame = new EventEmitter();
   title: string;
 
-  constructor(
-    private router: Router,
-    private dataService: DataService) {
-  }
-
   create() {
-    const gameId = this.dataService.addNewGame({ title: this.title } as IGame);
+    this.createGame.emit(this.title);
     this.title = null;
-    this.router.navigate(['/games/' + gameId]);
   }
 
   quickStart() {
-    this.title = 'Quick Start game';
-    this.create();
+    this.quickStartGame.emit();
   }
 }

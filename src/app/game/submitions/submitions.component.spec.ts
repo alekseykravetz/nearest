@@ -8,7 +8,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { FirebaseApp } from 'angularfire2';
 
 
-fdescribe('SubmitionsComponent', () => {
+describe('SubmitionsComponent', () => {
   let component: SubmitionsComponent;
   let fixture: ComponentFixture<SubmitionsComponent>;
 

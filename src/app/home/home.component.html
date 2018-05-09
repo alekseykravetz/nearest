@@ -1,7 +1,10 @@
-<mat-card *ngIf="!accountService.user">
-  <span class="not-logged-in">Can't play when not logged in!</span>
-</mat-card>
+<div *ngIf="accountService.user; else loggedOut">
+  <app-home-game-creator (createGame)="createGame($event)" (quickStartGame)="quickStartGame()"></app-home-game-creator>
+  <app-home-active-games [games]="activeGames"></app-home-active-games>
+</div>
 
-<app-home-game-creator *ngIf="accountService.user"></app-home-game-creator>
-
-<app-home-active-games *ngIf="accountService.user"></app-home-active-games>
+<ng-template #loggedOut>
+  <mat-card>
+    <span class="not-logged-in">Can't play when not logged in!</span>
+  </mat-card>
+</ng-template>

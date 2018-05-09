@@ -1,8 +1,15 @@
-import {  RouterTestingModule } from '@angular/router/testing';
-import { IGame } from './../../models/game';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ActiveGamesComponent } from './active-games.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { AppModule } from './../../app.module';
+import { APP_BASE_HREF } from '@angular/common';
+import { User } from '@firebase/auth-types';
+import { IGame } from '../../models/game';
+import { DataService } from './../../services/data.service';
+import { RouterTestingModule } from '@angular/router/testing';
+
+
+
+
 import { MatCardModule, MatListModule } from '@angular/material';
 import { DebugElement, Component, ChangeDetectionStrategy } from '@angular/core';
 
@@ -21,16 +28,20 @@ fdescribe('GamesComponent', () => {
     });
 
     TestBed.configureTestingModule({
-      declarations: [ActiveGamesComponent],
-      imports: [MatCardModule, MatListModule, RouterTestingModule ],
-      providers: []
-    })
-      .compileComponents();
+      imports: [AppModule],
+      providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ActiveGamesComponent);
     component = fixture.componentInstance;
+
+    component.games = [
+      { title: 'test title 1' } as IGame,
+      { title: 'test title 1' } as IGame
+    ];
+
     fixture.detectChanges();
   });
 
@@ -39,16 +50,6 @@ fdescribe('GamesComponent', () => {
   });
 
   it('should show active games', () => {
-    component.games = [
-      { title: 'test title 1' } as IGame,
-      { title: 'test title 1' } as IGame
-    ];
-    fixture.detectChanges();
-
-    const debugElement: DebugElement = fixture.debugElement;
-    const nativeElement: HTMLElement = debugElement.nativeElement;
-    console.log(fixture);
-
-    expect(nativeElement.querySelector('a').innerHTML).toBe('test title 1 - ');
+    expect(fixture.debugElement.nativeElement.querySelector('a').innerHTML).toBe('test title 1 - ');
   });
 });

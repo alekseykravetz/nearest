@@ -1,12 +1,11 @@
-import { IGame } from './../../models/game';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatToolbarModule, MatCardModule } from '@angular/material';
-
 import { WinnerComponent } from './winner.component';
-import { By } from '@angular/platform-browser';
-import { DebugElement, ChangeDetectionStrategy, Component } from '@angular/core';
-
-
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { AppModule } from './../../app.module';
+import { APP_BASE_HREF } from '@angular/common';
+import { User } from '@firebase/auth-types';
+import { IGame } from '../../models/game';
+import { DataService } from './../../services/data.service';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 fdescribe('GameWinnerComponent', () => {
   let component: WinnerComponent;
@@ -21,24 +20,17 @@ fdescribe('GameWinnerComponent', () => {
         changeDetection: ChangeDetectionStrategy.Default,
       })
     });
+
     TestBed.configureTestingModule({
-      declarations: [WinnerComponent],
-      imports: [MatToolbarModule, MatCardModule],
-    })
-      .compileComponents();
+      imports: [AppModule],
+      providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(WinnerComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('should show winner', () => {
     component.game = {
       id: 'mock game',
       createDate: new Date(),
@@ -50,9 +42,15 @@ fdescribe('GameWinnerComponent', () => {
       timeLeftInSeconds: 60,
       title: 'xxx',
     } as IGame;
+
     fixture.detectChanges();
-    const debugElement: DebugElement = fixture.debugElement;
-    const nativeElement: HTMLElement = debugElement.nativeElement;
-    expect(nativeElement.querySelector('#winner-label').innerHTML).toBe('Ran');
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should show winner', () => {
+    expect(fixture.debugElement.nativeElement.querySelector('#winner-label').innerHTML).toBe('Ran');
   });
 });

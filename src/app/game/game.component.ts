@@ -19,6 +19,8 @@ export class GameComponent implements OnInit {
   private navigatedGameId: string;
   game: IGame;
   userSubmition: ISubmition;
+  timeLeftInSeconds: number;
+  // leftSecondTimer: any;
 
   constructor(
     private router: ActivatedRoute,
@@ -33,7 +35,12 @@ export class GameComponent implements OnInit {
       this.dataService.getGameDocRef(this.navigatedGameId).valueChanges().subscribe(game => {
         this.game = game;
 
-        // this.startGameTimer();
+        /* if (!this.leftSecondTimer && this.game.createDate) {
+          this.startGameTimer(this.game.createDate);
+        }
+        if (this.game.isEnded) {
+          clearInterval(this.leftSecondTimer);
+        } */
       });
 
       if (this.accountService.user) {
@@ -48,17 +55,15 @@ export class GameComponent implements OnInit {
     }
   }
 
-  private startGameTimer() {
-    const gameSeconds = this.game.createDate.getSeconds();
+  /* private startGameTimer(createDate: string) {
+    const gameSec = new Date(createDate).getSeconds();
+    const gameEndSec = gameSec + 60;
 
-    let timeLeftInSeconds = 60;
-    const timer = setInterval(() => {
-      timeLeftInSeconds--;
-      if (timeLeftInSeconds <= 0) {
-        clearInterval(timer);
-      }
+    this.leftSecondTimer = setInterval(() => {
+      const nowSec = new Date().getSeconds();
+      this.timeLeftInSeconds = gameEndSec - nowSec;
     }, 1000);
-  }
+  } */
 
   private getUserSubmition() {
     this.dataService.getGameUserSubmitionCollectionRef(this.navigatedGameId, this.accountService.user.uid).valueChanges()

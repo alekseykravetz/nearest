@@ -2,7 +2,7 @@ import { ISubmition } from './submition';
 export interface IGame {
     id: string;
     title: string;
-    createDate: Date;
+    createDate: string;
     endDate?: Date;
     isEnded: boolean;
     numberToGuess?: number;

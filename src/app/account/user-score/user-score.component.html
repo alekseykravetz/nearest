@@ -1,2 +1,4 @@
-<span *ngIf="accountService.user" style="margin-right: 5px; color: yellow">{{ (score$ | async)?.points }}</span>
-<i *ngIf="accountService.user" style="margin-right: 20px; color: yellow" class="fas fa-star"></i>
+<div *ngIf="accountService.user && (score$ | async)?.points as points">
+    <span  style="margin-right: 5px; color: yellow">{{ points }}</span>
+    <i *ngIf="points" style="margin-right: 20px; color: yellow" class="fas fa-star"></i>
+</div>

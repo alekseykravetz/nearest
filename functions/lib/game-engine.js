@@ -8,19 +8,24 @@ class GameEngine {
     }
     startGame() {
         console.log('startGame() - ' + this.gameId);
-        let timeLeftInSeconds = 60;
+        const timer = setInterval(() => {
+            this.endGame();
+            clearInterval(timer);
+        }, 1000 * 60);
+        /* let timeLeftInSeconds = 60;
         const timer = setInterval(() => {
             timeLeftInSeconds--;
             this.gameDocRef
                 .set({ timeLeftInSeconds: timeLeftInSeconds }, { merge: true })
                 .catch(err => {
-                console.log(err);
-            });
+                    console.log(err);
+                });
+
             if (timeLeftInSeconds <= 0) {
                 this.endGame();
                 clearInterval(timer);
             }
-        }, 1000);
+        }, 1000); */
     }
     endGame() {
         console.log('endGame() - ' + this.gameId);
@@ -31,7 +36,6 @@ class GameEngine {
             this.gameDocRef
                 .set({
                 isEnded: true,
-                endDate: Date(),
                 numberToGuess: numberToGuess,
                 winner: winner
             }, { merge: true })

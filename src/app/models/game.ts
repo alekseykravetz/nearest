@@ -3,11 +3,10 @@ export interface IGame {
     id: string;
     title: string;
     createDate: string;
-    endDate?: Date;
+    endDate: string;
     isEnded: boolean;
     numberToGuess?: number;
     winner: ISubmition;
-    timeLeftInSeconds: number;
 }
 
 

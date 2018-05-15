@@ -20,7 +20,8 @@ export class GameComponent implements OnInit {
   game: IGame;
   userSubmition: ISubmition;
   timeLeftInSeconds: number;
-  // leftSecondTimer: any;
+  leftSecondTimer: any;
+  gameTimerStarted = false;
 
   constructor(
     private router: ActivatedRoute,
@@ -35,12 +36,13 @@ export class GameComponent implements OnInit {
       this.dataService.getGameDocRef(this.navigatedGameId).valueChanges().subscribe(game => {
         this.game = game;
 
-        /* if (!this.leftSecondTimer && this.game.createDate) {
-          this.startGameTimer(this.game.createDate);
+        if (!this.gameTimerStarted && this.game.endDate) {
+          this.gameTimerStarted = true;
+          this.startGameTimer(this.game.endDate);
         }
         if (this.game.isEnded) {
           clearInterval(this.leftSecondTimer);
-        } */
+        }
       });
 
       if (this.accountService.user) {
@@ -55,15 +57,23 @@ export class GameComponent implements OnInit {
     }
   }
 
-  /* private startGameTimer(createDate: string) {
-    const gameSec = new Date(createDate).getSeconds();
-    const gameEndSec = gameSec + 60;
+  private startGameTimer(endDate: string) {
+    const endGameMoment = moment(endDate);
+    console.log(endGameMoment.toObject());
 
     this.leftSecondTimer = setInterval(() => {
-      const nowSec = new Date().getSeconds();
-      this.timeLeftInSeconds = gameEndSec - nowSec;
+      if (endGameMoment.seconds() !== 0) {
+        const end = endGameMoment.clone();
+        end.subtract(moment().toObject());
+        // sync local and firbase server time
+        if (end.minutes() === 0) {
+          this.timeLeftInSeconds = end.seconds();
+        }
+      } else {
+        clearInterval(this.leftSecondTimer);
+      }
     }, 1000);
-  } */
+  }
 
   private getUserSubmition() {
     this.dataService.getGameUserSubmitionCollectionRef(this.navigatedGameId, this.accountService.user.uid).valueChanges()

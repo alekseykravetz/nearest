@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ISubmition } from '../../models/submition';
 import { DataService } from '../../services/data.service';
+import { ISubmition } from 'models/submition';
 
 @Component({
   selector: 'app-game-submitions',

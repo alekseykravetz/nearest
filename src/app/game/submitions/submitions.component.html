@@ -4,7 +4,9 @@
   </mat-card-title>
   <mat-list>
     <mat-list-item *ngFor="let submition of submitions">
-      <img class="user-image" [src]="submition.photoURL" width="32" height="32" /> {{submition.userDisplayName}}: {{submition.value}}
+      <app-user-box [photoURL]="submition.photoURL">
+        <span>{{submition.userDisplayName}}: {{submition.value}}</span> 
+      </app-user-box>
     </mat-list-item>
   </mat-list>
 </mat-card>

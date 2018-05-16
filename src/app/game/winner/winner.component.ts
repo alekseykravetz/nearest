@@ -1,5 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { IGame } from '../../models/game';
+import { IGame } from 'models/game';
 
 @Component({
   selector: 'app-game-winner',

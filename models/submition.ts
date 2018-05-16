@@ -3,4 +3,5 @@ export interface ISubmition {
     userDisplayName: string;
     value: number;
     photoURL: string;
+    points: number;
 }

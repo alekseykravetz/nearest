@@ -8,9 +8,9 @@ class GameEngine {
     }
     startGame() {
         console.log('startGame() - ' + this.gameId);
-        const timer = setInterval(() => {
+        const timer = setTimeout(() => {
             this.endGame();
-            clearInterval(timer);
+            clearTimeout(timer);
         }, 1000 * 60);
         /* let timeLeftInSeconds = 60;
         const timer = setInterval(() => {
@@ -31,8 +31,7 @@ class GameEngine {
         console.log('endGame() - ' + this.gameId);
         const numberToGuess = Math.round(Math.random() * 100 + 1);
         console.log('number to guess: ' + numberToGuess);
-        this.getWinner(numberToGuess)
-            .then(winner => {
+        this.getWinner(numberToGuess).then(winner => {
             this.gameDocRef
                 .set({
                 isEnded: true,
@@ -58,24 +57,24 @@ class GameEngine {
             .get()
             .then(submitionsSnap => {
             console.log('submitionsSnap size = ' + submitionsSnap.size);
-            let winnerSubmition = null;
+            let winner = null;
             submitionsSnap.forEach(snap => {
-                const submition = snap.data();
-                if (!winnerSubmition) {
-                    winnerSubmition = submition;
+                const next = snap.data();
+                if (!winner) {
+                    winner = next;
                 }
                 else {
-                    const nearstDiff = numberToGuess - winnerSubmition.value;
-                    const nextDiff = numberToGuess - submition.value;
-                    if (Math.abs(nextDiff) < Math.abs(nearstDiff)) {
-                        winnerSubmition = submition;
+                    const winnerDiff = numberToGuess - winner.value;
+                    const nextDiff = numberToGuess - next.value;
+                    if (Math.abs(nextDiff) < Math.abs(winnerDiff)) {
+                        winner = next;
                     }
                 }
             });
-            if (winnerSubmition) {
-                winnerSubmition.points = submitionsSnap.size - 1;
+            if (winner) {
+                winner.points = submitionsSnap.size - 1;
             }
-            return Promise.resolve(winnerSubmition);
+            return Promise.resolve(winner);
         })
             .catch(err => {
             return Promise.reject(err);
@@ -89,10 +88,13 @@ class GameEngine {
             if (snap.exists) {
                 const userScore = snap.data();
                 console.log('userScoreDoc: ' + userScore);
-                const userPoints = userScore.points;
-                const newPoints = userPoints ? userPoints + winner.points : winner.points;
+                const newPoints = userScore.points ? userScore.points + winner.points : winner.points;
                 snap.ref
-                    .set({ points: newPoints }, { merge: true })
+                    .set({
+                    points: newPoints,
+                    photoURL: winner.photoURL,
+                    displayName: winner.userDisplayName
+                }, { merge: true })
                     .catch(err => {
                     console.error(err);
                 });
@@ -100,7 +102,11 @@ class GameEngine {
             else {
                 console.log('creating new score doc');
                 admin.firestore().collection('scores').doc(winner.userId)
-                    .set({ points: winner.points })
+                    .set({
+                    points: winner.points,
+                    photoURL: winner.photoURL,
+                    displayName: winner.userDisplayName
+                })
                     .catch(err => {
                     console.error(err);
                 });

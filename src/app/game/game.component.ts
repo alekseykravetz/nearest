@@ -3,11 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from '@firebase/auth-types';
-import { IGame } from '../models/game';
-import { ISubmition } from '../models/submition';
 import { DataService } from '../services/data.service';
 import { AccountService } from '../services/account.service';
 import * as moment from 'moment';
+import { IGame } from 'models/game';
+import { ISubmition } from 'models/submition';
 
 @Component({
   selector: 'app-game',
@@ -89,7 +89,7 @@ export class GameComponent implements OnInit {
         userId: this.accountService.user.uid,
         photoURL: this.accountService.user.photoURL,
         value: selected,
-      });
+      } as ISubmition);
   }
 
   goBack(): void {

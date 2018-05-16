@@ -1,11 +1,11 @@
 import { DataService } from './../../services/data.service';
-import { ISubmition } from './../../models/submition';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SubmitionsComponent } from './submitions.component';
 import { DebugElement } from '@angular/core';
 import { MatToolbarModule, MatCardModule, MatListModule } from '@angular/material';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { FirebaseApp } from 'angularfire2';
+import { ISubmition } from 'models/submition';
 
 
 describe('SubmitionsComponent', () => {

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { IUserScore } from '../../models/user-score';
 import { DataService } from '../../services/data.service';
 import { AccountService } from '../../services/account.service';
+import { IUserScore } from 'models/user-score';
 
 @Component({
   selector: 'app-account-user-score',

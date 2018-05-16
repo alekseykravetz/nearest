@@ -37,6 +37,8 @@ import { GuessSelectorComponent } from './game/guess-selector/guess-selector.com
 import { DataService } from './services/data.service';
 import { AccountService } from './services/account.service';
 import { GameCreatorComponent } from './home/game-creator/game-creator.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { UserBoxComponent } from './controls/user-box/user-box.component';
 
 
 @NgModule({
@@ -51,6 +53,8 @@ import { GameCreatorComponent } from './home/game-creator/game-creator.component
     GuessSelectorComponent,
     UserScoreComponent,
     GameCreatorComponent,
+    LeaderboardComponent,
+    UserBoxComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,9 +3,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from './../../app.module';
 import { APP_BASE_HREF } from '@angular/common';
 import { User } from '@firebase/auth-types';
-import { IGame } from '../../models/game';
+import { IGame } from 'models/game';
 import { DataService } from './../../services/data.service';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ISubmition } from 'models/submition';
 
 fdescribe('GameWinnerComponent', () => {
   let component: WinnerComponent;
@@ -33,11 +34,15 @@ fdescribe('GameWinnerComponent', () => {
 
     component.game = {
       id: 'mock game',
-      createDate: new Date(),
+      createDate: new Date().toISOString(),
+      endDate: new Date().toISOString(),
       winner: {
         userDisplayName: 'Ran',
-        photoURL: ''
-      },
+        photoURL: '',
+        userId: 'userId',
+        value: 10,
+        points: 5
+      } as ISubmition,
       isEnded: false,
       timeLeftInSeconds: 60,
       title: 'xxx',

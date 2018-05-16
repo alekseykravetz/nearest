@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { IGame } from '../models/game';
-import { ISubmition } from './../models/submition';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { IUserScore } from '../models/user-score';
 import { DocumentReference } from '@firebase/firestore-types';
+import { IGame } from 'models/game';
+import { ISubmition } from 'models/submition';
+import { IUserScore } from 'models/user-score';
 
 
 @Injectable()
@@ -33,6 +33,10 @@ export class DataService {
 
   getUserScoreDocRef(userId: string): AngularFirestoreDocument<IUserScore> {
     return this.db.doc<IUserScore>('scores/' + userId);
+  }
+
+  getLeaderboard() {
+    return this.db.collection<IUserScore>('scores').valueChanges();
   }
 
   getActiveGamesCollectionRef(): AngularFirestoreCollection<IGame> {

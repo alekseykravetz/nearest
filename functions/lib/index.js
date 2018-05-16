@@ -4,6 +4,7 @@ const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const game_engine_1 = require("./game-engine");
 const moment = require("moment");
+// import { IGame } from 'models/game';
 admin.initializeApp();
 exports.gameCreated = functions.firestore.document('games/{gameId}').onCreate(snap => {
     console.log('game created: ' + snap.ref.id);
@@ -16,6 +17,6 @@ exports.gameCreated = functions.firestore.document('games/{gameId}').onCreate(sn
         endDate: endGameISO,
         isEnded: false,
         id: snap.ref.id
-    }, { merge: true });
+    } /* as IGame */, { merge: true });
 });
 //# sourceMappingURL=index.js.map

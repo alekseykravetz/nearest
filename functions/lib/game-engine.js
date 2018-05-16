@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const admin = require("firebase-admin");
+// import { ISubmition } from 'models/submition';
+// import { IGame } from 'models/game';
+// import { IUserScore } from 'models/user-score';
 class GameEngine {
     constructor(gameId, gameDocRef = admin.firestore().doc('games/' + gameId)) {
         this.gameId = gameId;
@@ -37,7 +40,7 @@ class GameEngine {
                 isEnded: true,
                 numberToGuess: numberToGuess,
                 winner: winner
-            }, { merge: true })
+            } /* as IGame */, { merge: true })
                 .then(doc => {
                 console.log('game ended: ' + this.gameId);
             })
@@ -59,7 +62,7 @@ class GameEngine {
             console.log('submitionsSnap size = ' + submitionsSnap.size);
             let winner = null;
             submitionsSnap.forEach(snap => {
-                const next = snap.data();
+                const next = snap.data() /* as ISubmition */;
                 if (!winner) {
                     winner = next;
                 }
@@ -80,13 +83,13 @@ class GameEngine {
             return Promise.reject(err);
         });
     }
-    updateWinnerScores(winner) {
+    updateWinnerScores(winner /* ISubmition */) {
         console.log('updateWinnerScores() - ' + this.gameId);
         admin.firestore().collection('scores').doc(winner.userId)
             .get()
             .then(snap => {
             if (snap.exists) {
-                const userScore = snap.data();
+                const userScore = snap.data() /* as IUserScore */;
                 console.log('userScoreDoc: ' + userScore);
                 const newPoints = userScore.points ? userScore.points + winner.points : winner.points;
                 snap.ref
@@ -94,7 +97,7 @@ class GameEngine {
                     points: newPoints,
                     photoURL: winner.photoURL,
                     displayName: winner.userDisplayName
-                }, { merge: true })
+                } /* as IUserScore */, { merge: true })
                     .catch(err => {
                     console.error(err);
                 });
@@ -106,7 +109,7 @@ class GameEngine {
                     points: winner.points,
                     photoURL: winner.photoURL,
                     displayName: winner.userDisplayName
-                })
+                } /* as IUserScore */)
                     .catch(err => {
                     console.error(err);
                 });

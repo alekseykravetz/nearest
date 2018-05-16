@@ -2,7 +2,7 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import { GameEngine } from './game-engine';
 import * as moment from 'moment';
-import { IGame } from 'models/game';
+// import { IGame } from 'models/game';
 
 
 admin.initializeApp();
@@ -23,5 +23,5 @@ export const gameCreated = functions.firestore.document('games/{gameId}').onCrea
         endDate: endGameISO,
         isEnded: false,
         id: snap.ref.id
-    } as IGame, { merge: true });
+    } /* as IGame */, { merge: true });
 });

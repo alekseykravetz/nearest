@@ -1,8 +1,7 @@
-import { ISubmition } from 'models/submition';
-
 import * as admin from 'firebase-admin';
-import { IGame } from 'models/game';
-import { IUserScore } from 'models/user-score';
+// import { ISubmition } from 'models/submition';
+// import { IGame } from 'models/game';
+// import { IUserScore } from 'models/user-score';
 
 export class GameEngine {
 
@@ -48,7 +47,7 @@ export class GameEngine {
                     isEnded: true,
                     numberToGuess: numberToGuess,
                     winner: winner
-                } as IGame, { merge: true })
+                } /* as IGame */, { merge: true })
                 .then(doc => {
                     console.log('game ended: ' + this.gameId);
                 })
@@ -64,7 +63,7 @@ export class GameEngine {
         });
     }
 
-    private getWinner(numberToGuess: number): Promise<ISubmition> {
+    private getWinner(numberToGuess: number): Promise<any/* ISubmition */> {
         console.log('getWinner() - ' + this.gameId);
 
         return this.gameDocRef.collection('submitions')
@@ -72,9 +71,9 @@ export class GameEngine {
             .then(submitionsSnap => {
                 console.log('submitionsSnap size = ' + submitionsSnap.size);
 
-                let winner: ISubmition = null;
+                let winner: any/* ISubmition */ = null;
                 submitionsSnap.forEach(snap => {
-                    const next: ISubmition = snap.data() as ISubmition;
+                    const next: any/* ISubmition */ = snap.data() /* as ISubmition */;
                     if (!winner) {
                         winner = next;
                     } else {
@@ -95,14 +94,14 @@ export class GameEngine {
             });
     }
 
-    private updateWinnerScores(winner: ISubmition) {
+    private updateWinnerScores(winner: any/* ISubmition */) {
         console.log('updateWinnerScores() - ' + this.gameId);
 
         admin.firestore().collection('scores').doc(winner.userId)
             .get()
             .then(snap => {
                 if (snap.exists) {
-                    const userScore = snap.data() as IUserScore;
+                    const userScore = snap.data() /* as IUserScore */;
                     console.log('userScoreDoc: ' + userScore);
                     const newPoints = userScore.points ? userScore.points + winner.points : winner.points;
                     snap.ref
@@ -110,7 +109,7 @@ export class GameEngine {
                             points: newPoints,
                             photoURL: winner.photoURL,
                             displayName: winner.userDisplayName
-                        } as IUserScore, { merge: true })
+                        } /* as IUserScore */, { merge: true })
                         .catch(err => {
                             console.error(err);
                         });
@@ -122,7 +121,7 @@ export class GameEngine {
                             points: winner.points,
                             photoURL: winner.photoURL,
                             displayName: winner.userDisplayName
-                        }as IUserScore)
+                        } /* as IUserScore */)
                         .catch(err => {
                             console.error(err);
                         });

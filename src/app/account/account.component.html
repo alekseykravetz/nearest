@@ -6,8 +6,9 @@
 
 <div *ngIf="user" class="main">
   <app-account-user-score></app-account-user-score>
-  <span>{{user.displayName}}</span>
-  <img class="user-image" [src]="user.photoURL" width="32" height="32" />
+  <app-user-box [photoURL]="user.photoURL" [isRightImage]="true">
+    <span>{{user.displayName}}</span>
+  </app-user-box>
   <button mat-button color="secondary" (click)="doLogout()">
     <i class="fas fa-sign-out-alt fa-2x"></i>
   </button>

@@ -8,5 +8,6 @@ import { Component, Input } from '@angular/core';
 export class UserBoxComponent {
 
   @Input() photoURL: string;
+  @Input() isRightImage = false;
 
 }

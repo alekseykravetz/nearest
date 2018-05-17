@@ -22,6 +22,8 @@ import {
   MatSliderModule,
   MatProgressSpinnerModule,
   MatProgressBarModule,
+  MatSidenavModule,
+  MatCheckboxModule,
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -77,6 +79,8 @@ import { UserBoxComponent } from './controls/user-box/user-box.component';
     MatSliderModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
+    MatSidenavModule,
+    MatCheckboxModule,
   ],
   providers: [DataService, AccountService],
   bootstrap: [AppComponent]

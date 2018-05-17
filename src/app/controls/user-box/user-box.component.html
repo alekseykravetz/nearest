@@ -1,6 +1,6 @@
 <div class="main">
-    <img *ngIf="!isRightImage" class="nearest-cercle small-image left-image" [src]="photoURL" />
+    <img *ngIf="!isRightImage && photoURL" class="nearest-cercle small-image left-image" [src]="photoURL" />
     <ng-content></ng-content>
-    <img *ngIf="isRightImage" class="nearest-cercle small-image right-image" [src]="photoURL" />    
+    <img *ngIf="isRightImage && photoURL" class="nearest-cercle small-image right-image" [src]="photoURL" />    
 </div>
  

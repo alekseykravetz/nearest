@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { DocumentReference } from '@firebase/firestore-types';
@@ -35,8 +36,8 @@ export class DataService {
     return this.db.doc<IUserScore>('scores/' + userId);
   }
 
-  getLeaderboard() {
-    return this.db.collection<IUserScore>('scores').valueChanges();
+  getLeaderboard(): Observable<IUserScore[]> {
+    return this.db.collection<IUserScore>('scores', ref => ref.orderBy('points')).valueChanges();
   }
 
   getActiveGamesCollectionRef(): AngularFirestoreCollection<IGame> {

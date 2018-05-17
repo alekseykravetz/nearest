@@ -1,5 +1,7 @@
 import { DataService } from './../services/data.service';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { IUserScore } from 'models/user-score';
 
 @Component({
   selector: 'app-leaderboard',
@@ -8,14 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeaderboardComponent implements OnInit {
 
-  leaders$;
+  leaders$: Observable<IUserScore[]>;
 
-  constructor(
-    private dataService: DataService
-  ) { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.leaders$ = this.dataService.getLeaderboard();
   }
-
 }

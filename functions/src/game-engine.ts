@@ -13,13 +13,13 @@ export class GameEngine {
     startGame() {
         console.log('startGame() - ' + this.gameId);
 
-        const timer = setTimeout(() => {
+        /* const timer = setTimeout(() => {
             this.endGame();
             clearTimeout(timer);
-        }, 1000 * 60);
+        }, 1000 * 60); */
 
 
-        /* let timeLeftInSeconds = 60;
+        let timeLeftInSeconds = 60;
         const timer = setInterval(() => {
             timeLeftInSeconds--;
             this.gameDocRef
@@ -32,7 +32,7 @@ export class GameEngine {
                 this.endGame();
                 clearInterval(timer);
             }
-        }, 1000); */
+        }, 1000);
     }
 
     endGame() {

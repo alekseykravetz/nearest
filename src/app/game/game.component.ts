@@ -19,9 +19,6 @@ export class GameComponent implements OnInit {
   private navigatedGameId: string;
   game: IGame;
   userSubmition: ISubmition;
-  timeLeftInSeconds: number;
-  leftSecondTimer: any;
-  gameTimerStarted = false;
 
   constructor(
     private router: ActivatedRoute,
@@ -35,16 +32,7 @@ export class GameComponent implements OnInit {
     if (this.navigatedGameId) {
       this.dataService.getGameDocRef(this.navigatedGameId).valueChanges().subscribe(game => {
         this.game = game;
-
-        if (!this.gameTimerStarted && this.game.endDate) {
-          this.gameTimerStarted = true;
-          this.startGameTimer(this.game.endDate);
-        }
-        if (this.game.isEnded) {
-          clearInterval(this.leftSecondTimer);
-        }
       });
-
       if (this.accountService.user) {
         this.getUserSubmition();
       } else {
@@ -55,24 +43,6 @@ export class GameComponent implements OnInit {
         });
       }
     }
-  }
-
-  private startGameTimer(endDate: string) {
-    const endGameMoment = moment(endDate);
-    console.log(endGameMoment.toObject());
-
-    this.leftSecondTimer = setInterval(() => {
-      if (endGameMoment.seconds() !== 0) {
-        const end = endGameMoment.clone();
-        end.subtract(moment().toObject());
-        // sync local and firbase server time
-        if (end.minutes() === 0) {
-          this.timeLeftInSeconds = end.seconds();
-        }
-      } else {
-        clearInterval(this.leftSecondTimer);
-      }
-    }, 1000);
   }
 
   private getUserSubmition() {

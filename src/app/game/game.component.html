@@ -10,7 +10,7 @@
   <mat-progress-bar *ngIf="!game?.createDate" mode="indeterminate"></mat-progress-bar>
   <mat-toolbar *ngIf="!game?.isEnded && game?.createDate">
     <i class="far fa-clock" style="margin-right: 10px"></i>
-    <span>Game ends in {{ timeLeftInSeconds }} seconds</span>
+    <span>Game ends in {{ game?.timeLeftInSeconds }} seconds</span>
   </mat-toolbar>
   <mat-toolbar *ngIf="game?.isEnded" color="accent" class="animated flipInX 4s">
     <h3>Game Number: {{ game.numberToGuess }}</h3>

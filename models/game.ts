@@ -4,6 +4,7 @@ export interface IGame {
     title: string;
     createDate: string;
     endDate: string;
+    timeLeftInSeconds: number;
     isEnded: boolean;
     numberToGuess?: number;
     winner: ISubmition;

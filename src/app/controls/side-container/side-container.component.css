@@ -1,0 +1,15 @@
+.sidenav-container {
+    min-height: 500px;
+}
+
+.main-content {
+    display: flex;
+}
+
+.main-content-button {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.aside-content {
+    height: 100%;
+}

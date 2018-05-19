@@ -1,21 +1,19 @@
-<mat-drawer-container class="sidenav-container" autosize>
+<app-side-container>
+  <div class="app-side-container-aside">
 
-  <mat-drawer #drawer class="sidenav" mode="side">
     <app-leaderboard></app-leaderboard>
-  </mat-drawer>
 
-  <div class="sidenav-content">
-    <div (click)="drawer.toggle()">
-      <i class="fas fa-toggle-off"></i>
-    </div>
+  </div>
+  
+  <div class="app-side-container-main">
+
     <div *ngIf="accountService.user; else loggedOut">
       <app-home-game-creator (createGame)="createGame($event)" (quickStartGame)="quickStartGame()"></app-home-game-creator>
       <app-home-active-games [games]="activeGames"></app-home-active-games>
     </div>
+
   </div>
-
-
-</mat-drawer-container>
+</app-side-container>
 
 <ng-template #loggedOut>
   <mat-card>

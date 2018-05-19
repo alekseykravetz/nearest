@@ -1,17 +1,15 @@
 .sidenav-container {
-    width: 500px;
-    height: 500px;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-  }
-  
-  .sidenav-content {
-    display: flex;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .sidenav {
-    height: fit-content;
-    padding: 20px;
-  }
+  min-height: 500px;
+}
+
+.main-content {
+  display: flex;
+}
+
+.main-content-button {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.aside-content {
+  height: 100%;
+}

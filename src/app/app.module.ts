@@ -41,6 +41,7 @@ import { AccountService } from './services/account.service';
 import { GameCreatorComponent } from './home/game-creator/game-creator.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { UserBoxComponent } from './controls/user-box/user-box.component';
+import { SideContainerComponent } from './controls/side-container/side-container.component';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { UserBoxComponent } from './controls/user-box/user-box.component';
     GameCreatorComponent,
     LeaderboardComponent,
     UserBoxComponent,
+    SideContainerComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,7 @@
+div.slider-container {
+    display: flex;
+}
+
+mat-slider {
+    flex-grow: 1;
+}

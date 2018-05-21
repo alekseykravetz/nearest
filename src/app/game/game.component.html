@@ -10,10 +10,12 @@
   <mat-progress-bar *ngIf="!game?.createDate" mode="indeterminate"></mat-progress-bar>
   <mat-toolbar *ngIf="!game?.isEnded && game?.createDate">
     <i class="far fa-clock" style="margin-right: 10px"></i>
-    <span>Game ends in {{ game?.timeLeftInSeconds }} seconds</span>
+  <mat-progress-bar *ngIf="game?.createDate && !game?.timeLeftInSeconds" mode="indeterminate"></mat-progress-bar>
+    
+    <span *ngIf="game?.timeLeftInSeconds">Game ends in <span [ngClass]="{'last-ten-seconds' : game?.timeLeftInSeconds < 10}">{{ game?.timeLeftInSeconds }}</span> seconds</span>
   </mat-toolbar>
-  <mat-toolbar *ngIf="game?.isEnded" color="accent" class="animated flipInX 4s">
-    <h3>Game Number: {{ game.numberToGuess }}</h3>
+  <mat-toolbar *ngIf="game?.isEnded" color="primary" class="animated flipInX 4s">
+    <h3>Game Number: <span style="font-size: 32px">{{ game.numberToGuess }}</span></h3>
   </mat-toolbar>
 </mat-card>
 
@@ -21,10 +23,12 @@
 <app-game-guess-selector *ngIf="!game?.isEnded && !userSubmition" [submitDisabled]="userSubmition" (guessSubmitted)="guessSelected($event)">
 </app-game-guess-selector>
 
-<mat-card *ngIf="userSubmition" class="animated fadeIn 2s">
-  <h1>Your guess: {{ userSubmition.value }}</h1>
-</mat-card>
-
 <app-game-winner [game]="game"></app-game-winner>
+
+<mat-card *ngIf="userSubmition" class="animated fadeIn 2s">
+  <mat-toolbar>
+    <h3>Your guess: {{ userSubmition.value }}</h3>
+  </mat-toolbar>
+</mat-card>
 
 <app-game-submitions *ngIf="game && userSubmition" [gameId]="game?.id"></app-game-submitions>

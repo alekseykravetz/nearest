@@ -1,6 +1,6 @@
 <mat-card *ngIf="game?.winner as winner" class="animated 4s rubberBand">
   <mat-toolbar color="accent">
-    <h2>Winner:</h2>
+    <h2>Winner: {{winner.value}}</h2>
   </mat-toolbar>
   <mat-toolbar color="accent" >
     <span id="winner-label">{{ winner.userDisplayName }}</span>

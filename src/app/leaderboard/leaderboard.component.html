@@ -5,7 +5,15 @@
   <mat-list>
     <mat-list-item *ngFor="let leader of leaders$ | async">
       <app-user-box [photoURL]="leader.photoURL">
-        {{leader.points}}
+        <div>
+          <div *ngIf="leader.points">
+            <span>{{ leader.points }}</span>
+            <i style="margin-left: 5px;" class="fas fa-star"></i>
+          </div>
+          <div>
+            {{ leader.displayName }}
+          </div>
+        </div>
       </app-user-box>
     </mat-list-item>
   </mat-list>

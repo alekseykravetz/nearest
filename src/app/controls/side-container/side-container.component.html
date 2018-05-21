@@ -5,7 +5,7 @@
   </mat-drawer>
 
   <div class="main-content">
-    <div class="main-content-button" (click)="drawer.toggle()">
+    <div class="main-content-button mat-toolbar mat-primary" (click)="drawer.toggle()">
       <i [ngClass]="{'fas': true, 'fa-toggle-off' : !asideOpen, 'fa-toggle-on' : asideOpen}"></i>
     </div>
 

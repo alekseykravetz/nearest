@@ -1,5 +1,4 @@
 .sidenav-container {
-    min-height: 500px;
     background-color: white;
 }
 
@@ -8,9 +7,11 @@
 }
 
 .main-content-button {
-    border: 1px solid rgba(0, 0, 0, 0.5);
+    height: 100vh;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .aside-content {
-    height: 100%;
+    height: 100vh;
 }

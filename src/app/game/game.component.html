@@ -2,33 +2,39 @@
   <i class="fas fa-backward"></i>
 </button>
 
-<mat-card>
-  <mat-card-title>
-    Game: {{ game?.title | uppercase }}
-  </mat-card-title>
+<div *ngIf="game as g">
+  <mat-card>
+    <mat-card-title>
+      Game: {{ g.title | uppercase }}
+    </mat-card-title>
 
-  <mat-progress-bar *ngIf="!game?.createDate" mode="indeterminate"></mat-progress-bar>
-  <mat-toolbar *ngIf="!game?.isEnded && game?.createDate">
-    <i class="far fa-clock" style="margin-right: 10px"></i>
-  <mat-progress-bar *ngIf="game?.createDate && !game?.timeLeftInSeconds" mode="indeterminate"></mat-progress-bar>
-    
-    <span *ngIf="game?.timeLeftInSeconds">Game ends in <span [ngClass]="{'last-ten-seconds' : game?.timeLeftInSeconds < 10}">{{ game?.timeLeftInSeconds }}</span> seconds</span>
-  </mat-toolbar>
-  <mat-toolbar *ngIf="game?.isEnded" color="primary" class="animated flipInX 4s">
-    <h3>Game Number: <span style="font-size: 32px">{{ game.numberToGuess }}</span></h3>
-  </mat-toolbar>
-</mat-card>
+    <mat-progress-bar *ngIf="!g.createDate" mode="indeterminate"></mat-progress-bar>
+    <mat-toolbar *ngIf="!g.isEnded && g.createDate">
+      <i class="far fa-clock" style="margin-right: 10px"></i>
+      <mat-progress-bar *ngIf="g.createDate && !g.timeLeftInSeconds" mode="indeterminate"></mat-progress-bar>
+      <span *ngIf="g.timeLeftInSeconds">Game ends in
+        <span [ngClass]="{'last-ten-seconds' : g.timeLeftInSeconds < 10}">{{ g.timeLeftInSeconds }}</span> seconds
+      </span>
+    </mat-toolbar>
+    <mat-toolbar *ngIf="g.isEnded" color="primary" class="animated flipInX 4s">
+      <h3>Game Number:
+        <span style="font-size: 32px">{{ game.numberToGuess }}</span>
+      </h3>
+    </mat-toolbar>
+  </mat-card>
 
 
-<app-game-guess-selector *ngIf="!game?.isEnded && !userSubmition" [submitDisabled]="userSubmition" (guessSubmitted)="guessSelected($event)">
-</app-game-guess-selector>
+  <app-game-guess-selector *ngIf="!g.isEnded && !userSubmition && g.createDate" [submitDisabled]="userSubmition" (guessSubmitted)="guessSelected($event)">
+  </app-game-guess-selector>
 
-<app-game-winner [game]="game"></app-game-winner>
+  <app-game-winner [game]="game"></app-game-winner>
 
-<mat-card *ngIf="userSubmition" class="animated fadeIn 2s">
-  <mat-toolbar>
-    <h3>Your guess: {{ userSubmition.value }}</h3>
-  </mat-toolbar>
-</mat-card>
+  <mat-card *ngIf="userSubmition" class="animated fadeIn 2s">
+    <mat-toolbar>
+        <i class="far fa-check-circle" style="margin-right: 10px"></i>
+         <h3>Your guess: {{ userSubmition.value }}</h3>
+    </mat-toolbar>
+  </mat-card>
 
-<app-game-submitions *ngIf="game && userSubmition" [gameId]="game?.id"></app-game-submitions>
+  <app-game-submitions *ngIf="game && userSubmition" [gameId]="g.id"></app-game-submitions>
+</div>

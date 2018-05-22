@@ -1,0 +1,10 @@
+<div style="display: flex;">
+  <a class="active-game-link" routerLink="/games/{{game.id}}">{{game.createDate | date:'hh:mm:ss'}} - {{game.title}}</a>
+  <div style="margin-left: 10px">
+    <div style="display: flex;">
+        <span>count: {{ submitionsCount }} - </span>
+        <app-home-active-games-game-submitions [gameId]="game.id" (count)="submitionsCount = $event;">          
+        </app-home-active-games-game-submitions>
+    </div>
+  </div>
+</div>

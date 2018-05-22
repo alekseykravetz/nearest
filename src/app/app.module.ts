@@ -30,10 +30,12 @@ import { AppComponent } from './app.component';
 import { AccountComponent } from './account/account.component';
 import { UserScoreComponent } from './account/user-score/user-score.component';
 import { ActiveGamesComponent } from './home/active-games/active-games.component';
+import { GameComponent as ActiveGameComponent } from './home/active-games/game/game.component';
 import { GameComponent } from './game/game.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app.routing';
-import { SubmitionsComponent } from './game/submitions/submitions.component';
+import { SubmitionsComponent as GameSubmitionsComponent } from './game/submitions/submitions.component';
+import { SubmitionsComponent as ActiveGameSubmitionsComponent } from './home/active-games/game/submitions/submitions.component';
 import { WinnerComponent } from './game/winner/winner.component';
 import { GuessSelectorComponent } from './game/guess-selector/guess-selector.component';
 import { DataService } from './services/data.service';
@@ -50,8 +52,10 @@ import { SideContainerComponent } from './controls/side-container/side-container
     AccountComponent,
     ActiveGamesComponent,
     GameComponent,
+    ActiveGameComponent,
     HomeComponent,
-    SubmitionsComponent,
+    GameSubmitionsComponent,
+    ActiveGameSubmitionsComponent,
     WinnerComponent,
     GuessSelectorComponent,
     UserScoreComponent,

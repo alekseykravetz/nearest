@@ -5,6 +5,7 @@
   <mat-list>
     <mat-list-item *ngFor="let game of games; trackBy: trackById">
       <app-home-active-games-game [game]="game"></app-home-active-games-game>
+      <mat-divider></mat-divider>
     </mat-list-item>
   </mat-list>
 </mat-card>

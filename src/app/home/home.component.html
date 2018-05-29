@@ -4,9 +4,9 @@
   </div>
 
   <div class="app-side-container-main main-content">
-    <div *ngIf="accountService.user; else loggedOut" class="main-content-container">
+    <div *ngIf="accountService.user; else loggedOut">
       <app-home-game-creator (createGame)="createGame($event)" (quickStartGame)="quickStartGame()"></app-home-game-creator>
-      <app-home-active-games [games]="activeGames" class="main-content-container-last"></app-home-active-games>
+      <app-home-active-games [games]="activeGames" class="last-child"></app-home-active-games>
     </div>
   </div>
 </app-side-container>

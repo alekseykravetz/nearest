@@ -1,18 +1,20 @@
 .sidenav-container {
     background-color: white;
+    height: 100%;
+}
+
+.aside-container {
+    height: 100%;    
 }
 
 .main-content {
     display: flex;
+    height: 100%;
 }
 
 .main-content-button {
-    height: 100vh;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding: 0 5px;
     cursor: pointer;
-}
-
-.aside-content {
-    height: 100vh;
+    box-shadow: 0 3px 3px 3px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);    
+    z-index: 100;
 }

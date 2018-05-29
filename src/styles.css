@@ -1,15 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
-app-root {
-    overflow-y: hidden;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 128px;
-    bottom: 0;
+* {
+    box-sizing: border-box;
+    font-family: 'Source Serif Pro', serif;
+}
+
+html {
+    position: relative;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    position: relative;
+    top: 0;
     left: 0;
     right: 0;
+    bottom: 0;
+    height: calc(100% - 80px);
+    overflow: hidden;
 }
 
 .nearest-cercle {

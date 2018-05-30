@@ -2,10 +2,10 @@
   <i class="fas fa-backward"></i>
 </button>
 
-<div *ngIf="game as g">
+<div class="container" *ngIf="game as g">
   <mat-card>
     <mat-card-title>
-      Game: {{ g.title | uppercase }}
+      <span>Game: {{ g.title | uppercase }}</span>      
     </mat-card-title>
 
     <mat-progress-bar *ngIf="!g.createDate" mode="indeterminate"></mat-progress-bar>

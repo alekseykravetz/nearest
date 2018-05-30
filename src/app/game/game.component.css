@@ -1,9 +1,9 @@
 :host {
-    overflow-y: auto;
+    height: inherit;
 }
 
-button {
-    margin-right: 10px;
+.container {
+    height: calc(100% - 36px); /* 36px: button before container */
 }
 
 mat-slider {
@@ -13,3 +13,8 @@ mat-slider {
 .last-ten-seconds {
     color: red;
 }
+
+mat-toolbar h3 {
+    font-family: 'Source Serif Pro', serif;    
+}
+

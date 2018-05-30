@@ -5,3 +5,7 @@
     margin-bottom: 20px;
     border: 2px solid white;
 }
+
+mat-toolbar h2 {
+    font-family: 'Source Serif Pro', serif;    
+}

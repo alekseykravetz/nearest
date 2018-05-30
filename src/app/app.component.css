@@ -1,8 +1,9 @@
 :host {
     height: inherit;
 }
+
 .container {
-    height: calc(100% - 80px);   
+    height: inherit;  
 }
 
 .navbar {
@@ -20,5 +21,6 @@
 .content {
     position: relative;
     top: 80px;
-    height: 100%;
+    height: calc(100% - 80px); /* 80px: navbar */
 }
+

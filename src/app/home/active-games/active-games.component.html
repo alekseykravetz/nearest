@@ -3,7 +3,7 @@
     Active Games
   </mat-card-title>
   <mat-list>
-    <mat-list-item *ngFor="let game of games; trackBy: trackById">
+    <mat-list-item *ngFor="let game of games; trackBy: trackById" style="height: auto;">
       <app-home-active-games-game [game]="game"></app-home-active-games-game>
       <mat-divider></mat-divider>
     </mat-list-item>

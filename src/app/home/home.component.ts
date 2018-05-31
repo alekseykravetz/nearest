@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.activeGames.length > 0) {
       this.router.navigate(['/games/' + this.activeGames[0].id]);
     } else {
-      this.createGame('Quick Start game');
+      this.createGame('Quick');
     }
   }
 

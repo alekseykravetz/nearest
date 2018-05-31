@@ -1,4 +1,4 @@
-<div style="display: flex;">
+<div *ngIf="submitions?.length > 0" style="display: flex;">
   <div *ngFor="let submition of submitions">
       <app-user-box [photoURL]="submition.photoURL"></app-user-box>
   </div>

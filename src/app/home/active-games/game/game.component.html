@@ -1,12 +1,12 @@
-<div class="horizontal-container">
-  <a class="active-game-link" routerLink="/games/{{game.id}}">{{game.createDate | date:'hh:mm:ss'}} - {{game.title}}</a>
-  <div class="active-game-detail">
-    <div class="horizontal-container">
-      <div class="submitions-count">
-        <i class="far fa-check-circle"></i>
-        <span>{{ submitionsCount }}</span>
-      </div>
-      <app-home-active-games-game-submitions [gameId]="game.id" (count)="submitionsCount = $event;"></app-home-active-games-game-submitions>
-    </div>
+<a class="container" routerLink="/games/{{game.id}}">
+  <span>{{game.createDate | date:'hh:mm:ss'}} - {{game.title}}</span>
+  <i class="far fa-clock icon"></i>
+  <span *ngIf="game.timeLeftInSeconds" [ngClass]="{'last-ten-seconds' : game.timeLeftInSeconds < 10}">{{ game.timeLeftInSeconds }}</span>
+  <div class="submitions-count">
+    <i class="far fa-check-circle icon"></i>
+    <span>{{ submitionsCount }}</span>
   </div>
-</div>
+  <div class="submitions">
+    <app-home-active-games-game-submitions [gameId]="game.id" (count)="submitionsCount = $event;"></app-home-active-games-game-submitions>
+  </div>
+</a>

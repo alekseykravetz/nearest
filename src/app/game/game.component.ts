@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import { IGame } from 'models/game';
 import { ISubmition } from 'models/submition';
 import { SideBarConfigurationService } from '../services/side-bar-configuration.service';
+import { IAdditionalButton } from '../../../models/additional-button';
 
 @Component({
   selector: 'app-game',
@@ -27,7 +28,14 @@ export class GameComponent implements OnInit, OnDestroy {
     private dataService: DataService,
     public accountService: AccountService,
     private sideBarConfService: SideBarConfigurationService) {
+
     sideBarConfService.disableAsideContent();
+    sideBarConfService.changeAdditionalButtons([{
+      iconClass: 'fas fa-backward',
+      action: this.goBack,
+      // todo: remove actionContext
+      actionContext: this
+    }] as IAdditionalButton[]);
   }
 
   ngOnInit() {
@@ -71,6 +79,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sideBarConfService.enableAsideContent();
+    this.sideBarConfService.changeAdditionalButtons([]);
   }
 
 }

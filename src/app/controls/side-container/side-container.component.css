@@ -18,3 +18,9 @@
     color: rgb(212, 202, 202);
     cursor: default;
 }
+
+.main-content-button div {
+    margin: 16px 0;
+    color: white;
+    cursor: pointer;
+}

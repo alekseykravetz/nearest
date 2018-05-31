@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { IAdditionalButton } from 'models/additional-button';
 
 @Injectable()
 export class SideBarConfigurationService {
 
-  public asideContentEnabledSubject = new BehaviorSubject<boolean>(true);
+  asideContentEnabledSubject = new BehaviorSubject<boolean>(true);
+  additionalButtonsSubject = new BehaviorSubject<IAdditionalButton[]>([]);
 
   disableAsideContent() {
     this.asideContentEnabledSubject.next(false);
@@ -12,5 +14,9 @@ export class SideBarConfigurationService {
 
   enableAsideContent() {
     this.asideContentEnabledSubject.next(true);
+  }
+
+  changeAdditionalButtons(buttons: IAdditionalButton[]) {
+    this.additionalButtonsSubject.next(buttons);
   }
 }

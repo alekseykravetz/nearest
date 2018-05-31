@@ -7,6 +7,10 @@
   <div class="main-content">
     <div class="main-content-button mat-toolbar mat-primary" [ngClass]="{'main-content-button-disabled' : !asideContentEnabled}" (click)="toggle()">
       <i [ngClass]="{'fas': true, 'fa-toggle-off' : !asideOpen, 'fa-toggle-on' : asideOpen}"></i>
+      <div *ngFor="let additionalButton of additionalButtons" (click)="additionalButtonClicked(additionalButton)">        
+          <i [class]="additionalButton.iconClass"></i>
+      </div>
+      <!-- <i class="fas fa-backward"></i> -->
     </div>
 
     <ng-content select=".app-side-container-main"></ng-content>

@@ -1,8 +1,4 @@
-<button mat-button color="secondary" (click)="goBack()"> Back
-  <i class="fas fa-backward"></i>
-</button>
-
-<div class="container" *ngIf="game as g">
+<ng-container *ngIf="game as g">
   <mat-card>
     <mat-card-title>
       <span>Game: {{ g.title | uppercase }}</span>      
@@ -37,4 +33,4 @@
   </mat-card>
 
   <app-game-submitions *ngIf="game && userSubmition" [gameId]="g.id"></app-game-submitions>
-</div>
+</ng-container>

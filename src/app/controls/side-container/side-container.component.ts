@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { MatDrawer } from '@angular/material';
+import { SideBarConfigurationService } from '../../services/side-bar-configuration.service';
 
 @Component({
   selector: 'app-side-container',
@@ -6,5 +8,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./side-container.component.css']
 })
 export class SideContainerComponent {
-  asideOpen = false;
+
+  asideContentEnabled: boolean;
+  @ViewChild(MatDrawer) matDrawer;
+
+  constructor(private sideBarConfService: SideBarConfigurationService) {
+    sideBarConfService.asideContentEnabledSubject.subscribe(sideEnabled => {
+      this.asideContentEnabled = sideEnabled;
+    });
+  }
+
+  toggle() {
+    if (this.asideContentEnabled) {
+      this.matDrawer.toggle();
+    }
+  }
 }

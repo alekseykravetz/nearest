@@ -1,22 +1,30 @@
-<div class="container">
-
-  <mat-toolbar class="navbar" color="primary">
-    <div class="row middle-xs" style="width: 100%">
-      <span class="col-xs-12
+<mat-toolbar class="navbar" color="primary">
+  <div class="row middle-xs" style="width: 100%">
+    <span class="col-xs-12
                    col-sm-8" style="white-space: normal">
-        Welcome to who is Nearest!
-      </span>
-      <div class="col-xs-12
+      Welcome to who is Nearest!
+    </span>
+    <div class="col-xs-12
                   col-sm-4
                   last-sm
                   first-xs">
-        <app-account></app-account>
-      </div>
+      <app-account></app-account>
     </div>
-  </mat-toolbar>
-
-  <div class="content">
-    <router-outlet></router-outlet>
   </div>
+</mat-toolbar>
+
+<div class="content">
+
+  <app-side-container>
+
+    <div class="app-side-container-aside side-container-aside-content">
+      <app-leaderboard></app-leaderboard>
+    </div>
+
+    <div class="app-side-container-main side-container-main-content">
+      <router-outlet></router-outlet>
+    </div>
+    
+  </app-side-container>
 
 </div>

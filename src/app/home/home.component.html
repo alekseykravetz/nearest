@@ -1,15 +1,7 @@
-<app-side-container>
-  <div class="app-side-container-aside aside-content">
-    <app-leaderboard></app-leaderboard>
-  </div>
-
-  <div class="app-side-container-main main-content">
-    <div *ngIf="accountService.user; else loggedOut">
-      <app-home-game-creator (createGame)="createGame($event)" (quickStartGame)="quickStartGame()"></app-home-game-creator>
-      <app-home-active-games [games]="activeGames" class="last-child"></app-home-active-games>
-    </div>
-  </div>
-</app-side-container>
+<ng-container *ngIf="accountService.user; else loggedOut">
+  <app-home-game-creator (createGame)="createGame($event)" (quickStartGame)="quickStartGame()"></app-home-game-creator>
+  <app-home-active-games [games]="activeGames"></app-home-active-games>
+</ng-container>
 
 <ng-template #loggedOut>
   <mat-card class="logged-out-card">

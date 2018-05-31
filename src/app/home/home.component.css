@@ -1,30 +1,3 @@
-:host {
-  overflow-y: auto;
-}
-
-.aside-content {
-  height: inherit;
-}
-
-.main-content {
-  height: inherit;
-  width: 100%;
-}
-
-.main-content div {
-  height: inherit;
-  display: flex; 
-  flex-direction: column
-}
-
-.last-child {
-  flex-grow: 1; 
-
-  /* display, flex-direction: for active-games.component card flex-grow */
-  display: flex; 
-  flex-direction: column;
-}
-
 .logged-out-card {
   height: 100%;
   font-size: 32px;

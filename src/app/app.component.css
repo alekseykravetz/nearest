@@ -1,9 +1,6 @@
 :host {
+    display: block;
     height: inherit;
-}
-
-.container {
-    height: inherit;  
 }
 
 .navbar {
@@ -24,3 +21,11 @@
     height: calc(100% - 80px); /* 80px: navbar */
 }
 
+.side-container-aside-content {
+    height: 100%;
+}
+  
+.side-container-main-content {
+    height: 100%;
+    width: 100%;
+}

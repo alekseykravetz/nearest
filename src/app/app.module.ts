@@ -44,6 +44,7 @@ import { GameCreatorComponent } from './home/game-creator/game-creator.component
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { UserBoxComponent } from './controls/user-box/user-box.component';
 import { SideContainerComponent } from './controls/side-container/side-container.component';
+import { SideBarConfigurationService } from './services/side-bar-configuration.service';
 
 
 @NgModule({
@@ -88,7 +89,11 @@ import { SideContainerComponent } from './controls/side-container/side-container
     MatSidenavModule,
     MatCheckboxModule,
   ],
-  providers: [DataService, AccountService],
+  providers: [
+    DataService,
+    AccountService,
+    SideBarConfigurationService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

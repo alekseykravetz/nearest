@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -8,13 +8,14 @@ import { AccountService } from '../services/account.service';
 import * as moment from 'moment';
 import { IGame } from 'models/game';
 import { ISubmition } from 'models/submition';
+import { SideBarConfigurationService } from '../services/side-bar-configuration.service';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css']
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, OnDestroy {
 
   private navigatedGameId: string;
   game: IGame;
@@ -24,7 +25,9 @@ export class GameComponent implements OnInit {
     private router: ActivatedRoute,
     private location: Location,
     private dataService: DataService,
-    public accountService: AccountService) {
+    public accountService: AccountService,
+    private sideBarConfService: SideBarConfigurationService) {
+    sideBarConfService.disableAsideContent();
   }
 
   ngOnInit() {
@@ -64,6 +67,10 @@ export class GameComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  ngOnDestroy() {
+    this.sideBarConfService.enableAsideContent();
   }
 
 }

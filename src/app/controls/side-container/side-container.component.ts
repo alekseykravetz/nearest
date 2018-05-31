@@ -10,6 +10,7 @@ import { IAdditionalButton } from 'models/additional-button';
 })
 export class SideContainerComponent {
 
+  asideOpen: boolean;
   asideContentEnabled: boolean;
   @ViewChild(MatDrawer) matDrawer;
 

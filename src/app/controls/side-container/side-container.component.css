@@ -24,3 +24,9 @@
     color: white;
     cursor: pointer;
 }
+
+.additional-buttons i:hover {
+    /* color: yellow; */
+    transition: 0.5s;
+    transform: scale(1.1);
+}

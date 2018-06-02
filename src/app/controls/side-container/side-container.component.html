@@ -1,11 +1,11 @@
-<mat-drawer-container class="sidenav-container" autosize>
+<mat-drawer-container class="container" autosize>
 
   <mat-drawer mode="side" (opened)="asideOpen = true" (closed)="asideOpen = false">
     <ng-content select=".app-side-container-aside"></ng-content>
   </mat-drawer>
 
   <div class="main-content">
-    <div class="main-content-button mat-toolbar mat-primary" [ngClass]="{'main-content-button-disabled' : !asideContentEnabled}" (click)="toggle()">
+    <div class="side-panel mat-toolbar mat-primary" [ngClass]="{'side-panel-disabled' : !asideContentEnabled}" (click)="toggle()">
       <i [ngClass]="{'fas': true, 'fa-toggle-off' : !asideOpen, 'fa-toggle-on' : asideOpen}"></i>
       <div class="additional-buttons" *ngFor="let additionalButton of additionalButtons" (click)="additionalButtonClicked(additionalButton)">        
           <i [ngClass]="[additionalButton.iconClass, 'animated 2s fadeIn']"></i>

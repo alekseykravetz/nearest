@@ -1,4 +1,4 @@
-.sidenav-container {
+.container {
     height: 100%;
 }
 
@@ -7,26 +7,34 @@
     height: 100%;
 }
 
-.main-content-button {
+.side-panel {
     padding: 0 5px;
     cursor: pointer;
     box-shadow: 0 3px 3px 3px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);    
     z-index: 100;
 }
 
-.main-content-button-disabled {
+.side-panel > i:hover {
+    transition: 0.3s;
+    transform: scale(1.1);
+}
+
+.side-panel-disabled {
     color: rgb(212, 202, 202);
     cursor: default;
 }
 
-.main-content-button div {
+.side-panel.side-panel-disabled > i:hover{
+    transform: none;
+}
+
+.additional-buttons {
     margin: 16px 0;
     color: white;
     cursor: pointer;
 }
 
 .additional-buttons i:hover {
-    /* color: yellow; */
-    transition: 0.5s;
+    transition: 0.3s;
     transform: scale(1.1);
 }

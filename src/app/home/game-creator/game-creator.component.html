@@ -1,9 +1,14 @@
+<form #gameCreateForm="ngForm" (ngSubmit)="create()">
+
 <mat-card>
   <mat-form-field style="width: 120px; margin-right: 8px">
-    <input matInput placeholder="Game name" required [(ngModel)]="title">
+    <input matInput placeholder="Game name" required [(ngModel)]="title" #gameTitle="ngModel" name="title">
   </mat-form-field>
 
-  <button mat-raised-button color="basic" [disabled]="!title" (click)="create()">Create</button>
+  <button type="submit" mat-raised-button color="basic" [disabled]="!gameCreateForm.form.valid">Create</button>
   <button mat-raised-button color="primary" (click)="quickStart()">Quick Start</button>
   
 </mat-card>
+
+</form>
+

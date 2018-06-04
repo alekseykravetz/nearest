@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { ISubmition } from 'models/submition';
-import { DataService } from '../../../../services/data.service';
+import { DataService } from '../../../../common/services/data.service';
 
 @Component({
   selector: 'app-home-active-games-game-submitions',

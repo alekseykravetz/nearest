@@ -3,12 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from '@firebase/auth-types';
-import { DataService } from '../services/data.service';
-import { AccountService } from '../services/account.service';
+import { DataService } from '../common/services/data.service';
+import { AccountService } from '../common/services/account.service';
 import * as moment from 'moment';
 import { IGame } from 'models/game';
 import { ISubmition } from 'models/submition';
-import { SideBarConfigurationService } from '../services/side-bar-configuration.service';
+import { SideBarConfigurationService } from '../common/services/side-bar-configuration.service';
 import { IAdditionalButton } from '../../../models/additional-button';
 
 @Component({

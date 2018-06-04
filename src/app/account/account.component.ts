@@ -3,8 +3,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from '@firebase/auth-types';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { DataService } from '../services/data.service';
-import { AccountService } from './../services/account.service';
+import { DataService } from '../common/services/data.service';
+import { AccountService } from '../common/services/account.service';
 
 @Component({
   selector: 'app-account',

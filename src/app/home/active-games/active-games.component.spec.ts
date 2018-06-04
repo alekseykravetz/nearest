@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from './../../app.module';
 import { APP_BASE_HREF } from '@angular/common';
 import { User } from '@firebase/auth-types';
-import { DataService } from './../../services/data.service';
+import { DataService } from '../../common/services/data.service';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { MatCardModule, MatListModule } from '@angular/material';

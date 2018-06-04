@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DataService } from '../../services/data.service';
+import { DataService } from '../../common/services/data.service';
 import { ISubmition } from 'models/submition';
 
 @Component({

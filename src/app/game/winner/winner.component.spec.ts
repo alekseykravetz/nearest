@@ -4,7 +4,7 @@ import { AppModule } from './../../app.module';
 import { APP_BASE_HREF } from '@angular/common';
 import { User } from '@firebase/auth-types';
 import { IGame } from 'models/game';
-import { DataService } from './../../services/data.service';
+import { DataService } from './../../common/services/data.service';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ISubmition } from 'models/submition';
 

@@ -1,10 +1,10 @@
-import { AccountService } from './../services/account.service';
+import { AccountService } from './../common/services/account.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Component, OnInit, Input, OnDestroy, enableProdMode } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { DataService } from '../services/data.service';
+import { DataService } from '../common/services/data.service';
 import { Subscription } from 'rxjs/Subscription';
 import { IGame } from 'models/game';
 

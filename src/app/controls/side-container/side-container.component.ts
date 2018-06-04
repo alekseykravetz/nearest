@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material';
-import { SideBarConfigurationService } from '../../services/side-bar-configuration.service';
+import { SideBarConfigurationService } from '../../common/services/side-bar-configuration.service';
 import { IAdditionalButton } from 'models/additional-button';
 
 @Component({

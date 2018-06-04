@@ -1,5 +1,5 @@
 import { User } from '@firebase/auth-types';
-import { AccountService } from './../../services/account.service';
+import { AccountService } from '../services/account.service';
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 import { Observable } from 'rxjs/Observable';

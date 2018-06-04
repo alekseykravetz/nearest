@@ -1,4 +1,4 @@
-import { DataService } from './../../services/data.service';
+import { DataService } from './../../common/services/data.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SubmitionsComponent } from './submitions.component';
 import { DebugElement } from '@angular/core';

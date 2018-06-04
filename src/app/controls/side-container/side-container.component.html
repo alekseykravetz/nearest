@@ -1,7 +1,7 @@
 <mat-drawer-container class="container" autosize>
 
   <mat-drawer mode="side" (opened)="asideOpen = true" (closed)="asideOpen = false">
-    <ng-content select=".app-side-container-aside"></ng-content>
+    <ng-content select="[app-side-container-aside]"></ng-content>
   </mat-drawer>
 
   <div class="main-content">
@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <ng-content select=".app-side-container-main"></ng-content>
+    <ng-content select="[app-side-container-main]"></ng-content>
   </div>
 
 </mat-drawer-container>

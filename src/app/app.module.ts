@@ -45,6 +45,7 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { UserBoxComponent } from './controls/user-box/user-box.component';
 import { SideContainerComponent } from './controls/side-container/side-container.component';
 import { SideBarConfigurationService } from './services/side-bar-configuration.service';
+import { AuthGuardService } from './common/guards/auth.guard';
 
 
 @NgModule({
@@ -93,6 +94,7 @@ import { SideBarConfigurationService } from './services/side-bar-configuration.s
     DataService,
     AccountService,
     SideBarConfigurationService,
+    AuthGuardService,
   ],
   bootstrap: [AppComponent]
 })

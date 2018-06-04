@@ -18,7 +18,10 @@ import { IAdditionalButton } from '../../../models/additional-button';
 })
 export class GameComponent implements OnInit, OnDestroy {
 
-  private navigatedGameId: string;
+  private get navigatedGameId() {
+    return this.router.snapshot.params.id;
+  }
+
   game: IGame;
   userSubmition: ISubmition;
 
@@ -39,20 +42,11 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.navigatedGameId = this.router.snapshot.params.id;
     if (this.navigatedGameId) {
       this.dataService.getGameDocRef(this.navigatedGameId).valueChanges().subscribe(game => {
         this.game = game;
       });
-      if (this.accountService.user) {
-        this.getUserSubmition();
-      } else {
-        this.accountService.user$.subscribe(user => {
-          if (user) {
-            this.getUserSubmition();
-          }
-        });
-      }
+      this.getUserSubmition();
     }
   }
 
@@ -81,5 +75,4 @@ export class GameComponent implements OnInit, OnDestroy {
     this.sideBarConfService.enableAsideContent();
     this.sideBarConfService.changeAdditionalButtons([]);
   }
-
 }

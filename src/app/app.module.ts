@@ -42,8 +42,8 @@ import { DataService } from './common/services/data.service';
 import { AccountService } from './common/services/account.service';
 import { GameCreatorComponent } from './home/game-creator/game-creator.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
-import { UserBoxComponent } from './controls/user-box/user-box.component';
-import { SideContainerComponent } from './controls/side-container/side-container.component';
+import { UserBoxComponent } from './common/controls/user-box/user-box.component';
+import { SideContainerComponent } from './common/controls/side-container/side-container.component';
 import { SideBarConfigurationService } from './common/services/side-bar-configuration.service';
 import { AuthGuardService } from './common/guards/auth.guard';
 

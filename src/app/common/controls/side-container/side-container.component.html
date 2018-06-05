@@ -6,7 +6,7 @@
 
   <div class="main-content">
     <div class="side-panel mat-toolbar mat-primary" [ngClass]="{'side-panel-disabled' : !asideContentEnabled}" (click)="toggle()">
-      <i [ngClass]="{'fas': true, 'fa-toggle-off' : !asideOpen, 'fa-toggle-on' : asideOpen}"></i>
+      <i title="toggle" [ngClass]="{'fas': true, 'fa-toggle-off' : !asideOpen, 'fa-toggle-on' : asideOpen}"></i>
       <div class="additional-buttons" *ngFor="let additionalButton of additionalButtons" (click)="additionalButtonClicked(additionalButton)">        
           <i [ngClass]="[additionalButton.iconClass, 'animated 2s fadeIn']"></i>
       </div>

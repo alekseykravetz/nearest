@@ -3,7 +3,6 @@
 
 * {
     box-sizing: border-box;
-    font-family: 'Source Serif Pro', serif;
 }
 
 html {
@@ -14,8 +13,20 @@ html {
 body {
     margin: 0;
     height: inherit;
+    font-family: 'Source Serif Pro', serif;
+}
+
+.mat-card,
+.mat-list-item,
+.mat-toolbar,
+.mat-form-field,
+.mat-input-element,
+.mat-raised-button,
+.mat-slider-thumb-label-text {
+    font-family: 'Source Serif Pro', serif;
 }
 
 .nearest-cercle {
     border-radius: 50%;    
 }
+

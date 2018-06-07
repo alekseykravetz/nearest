@@ -1,4 +1,4 @@
-<a class="container" routerLink="/games/{{game.id}}">
+<a class="game-container" routerLink="/games/{{game.id}}">
   <span>{{game.createDate | date:'hh:mm:ss'}} - {{game.title}}</span>
   <i class="far fa-clock icon"></i>
   <span *ngIf="game.timeLeftInSeconds" [ngClass]="{'last-ten-seconds' : game.timeLeftInSeconds < 10}">{{ game.timeLeftInSeconds }}</span>

@@ -1,8 +1,11 @@
-:host() {
-    /* padding-left: 16px; */
-}
-
-div.main {
+.account-container {
     display: flex; 
     align-items: center;
+    justify-content: space-around;
+}
+
+.account-button:hover {
+    transition: 0.3s;
+    transform: scale(1.1);
+    cursor: pointer;
 }

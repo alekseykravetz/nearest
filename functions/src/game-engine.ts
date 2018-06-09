@@ -28,18 +28,27 @@ export class GameEngine {
             }
         }, 1000);
 
-        const leftBots = 3;
+        this.addBots();
+    }
+
+    addBots() {
+        let botNum = 1;
         const botsTimer = setInterval(() => {
-            if (leftBots > 0) {
-                this.gameDocRef.collection('submitions').add({
-                    userId: 'bot' + leftBots,
-                    userDisplayName: 'Bot ' + leftBots,
+            this.gameDocRef.collection('submitions')
+                .add({
+                    userId: 'bot' + botNum,
+                    userDisplayName: 'Bot ' + botNum,
                     value: Math.round(Math.random() * 100 + 1),
                     photoURL: 'https://cdn-images-1.medium.com/max/1200/1*paQ7E6f2VyTKXHpR-aViFg.png'
                 } /* as ISubmition */)
                 .catch(err => {
                     console.log(err);
                 });
+
+            botNum++;
+
+            if (botNum > 3) {
+                clearInterval(botsTimer);
             }
         }, 1000 * 15);
     }

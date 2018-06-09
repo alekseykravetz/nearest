@@ -13,12 +13,6 @@ export class GameEngine {
     startGame() {
         console.log('startGame() - ' + this.gameId);
 
-        /* const timer = setTimeout(() => {
-            this.endGame();
-            clearTimeout(timer);
-        }, 1000 * 60); */
-
-
         let timeLeftInSeconds = 60;
         const timer = setInterval(() => {
             timeLeftInSeconds--;
@@ -33,6 +27,21 @@ export class GameEngine {
                 clearInterval(timer);
             }
         }, 1000);
+
+        const leftBots = 3;
+        const botsTimer = setInterval(() => {
+            if (leftBots > 0) {
+                this.gameDocRef.collection('submitions').add({
+                    userId: 'bot' + leftBots,
+                    userDisplayName: 'Bot ' + leftBots,
+                    value: Math.round(Math.random() * 100 + 1),
+                    photoURL: 'https://cdn-images-1.medium.com/max/1200/1*paQ7E6f2VyTKXHpR-aViFg.png'
+                } /* as ISubmition */)
+                .catch(err => {
+                    console.log(err);
+                });
+            }
+        }, 1000 * 15);
     }
 
     endGame() {

@@ -1,3 +1,4 @@
+import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 // import { ISubmition } from 'models/submition';
 // import { IGame } from 'models/game';
@@ -31,24 +32,25 @@ export class GameEngine {
         this.addBots();
     }
 
-    addBots() {
-        let botNum = 1;
-        const botsTimer = setInterval(() => {
-            this.gameDocRef.collection('submitions')
-                .add({
-                    userId: 'bot' + botNum,
-                    userDisplayName: 'Bot ' + botNum,
-                    value: Math.round(Math.random() * 100 + 1),
-                    photoURL: 'https://cdn-images-1.medium.com/max/1200/1*paQ7E6f2VyTKXHpR-aViFg.png'
-                } /* as ISubmition */)
-                .catch(err => {
-                    console.log(err);
-                });
-
+    async addBots(): Promise<void> {
+        let botNum = 0;
+        const botsTimer = setInterval(async () => {
             botNum++;
-
-            if (botNum > 3) {
-                clearInterval(botsTimer);
+            try {
+                if (botNum < 4) {
+                    const subRef = await this.gameDocRef.collection('submitions')
+                        .add({
+                            userId: 'bot' + botNum,
+                            userDisplayName: 'Bot ' + botNum,
+                            value: Math.round(Math.random() * 100 + 1),
+                            photoURL: 'https://cdn-images-1.medium.com/max/1200/1*paQ7E6f2VyTKXHpR-aViFg.png'
+                        } /* as ISubmition */);
+                    console.log('Bot Submittion Id: ' + subRef.id);
+                } else {
+                    clearInterval(botsTimer);
+                }
+            } catch (err) {
+                console.log('addBots() - add submition Failed' + err);
             }
         }, 1000 * 15);
     }
@@ -74,42 +76,44 @@ export class GameEngine {
                 });
 
             if (winner) {
-                this.updateWinnerScores(winner)
+                const name = winner.userDisplayName;
+                if (name !== 'Bot 1' && name !== 'Bot 2' && name !== 'Bot 3') {
+                    this.updateWinnerScores(winner)
+                }
             }
         }).catch(err => {
             console.log(err);
         });
     }
 
-    private getWinner(numberToGuess: number): Promise<any/* ISubmition */> {
+    private async getWinner(numberToGuess: number): Promise<any/* ISubmition */> {
         console.log('getWinner() - ' + this.gameId);
 
-        return this.gameDocRef.collection('submitions')
-            .get()
-            .then(submitionsSnap => {
-                console.log('submitionsSnap size = ' + submitionsSnap.size);
+        try {
+            const submitionsSnap = await this.gameDocRef.collection('submitions').get();
 
-                let winner: any/* ISubmition */ = null;
-                submitionsSnap.forEach(snap => {
-                    const next: any/* ISubmition */ = snap.data() /* as ISubmition */;
-                    if (!winner) {
+            console.log('submitionsSnap size = ' + submitionsSnap.size);
+
+            let winner: any/* ISubmition */ = null;
+            submitionsSnap.forEach(snap => {
+                const next: any/* ISubmition */ = snap.data() /* as ISubmition */;
+                if (!winner) {
+                    winner = next;
+                } else {
+                    const winnerDiff = numberToGuess - winner.value;
+                    const nextDiff = numberToGuess - next.value;
+                    if (Math.abs(nextDiff) < Math.abs(winnerDiff)) {
                         winner = next;
-                    } else {
-                        const winnerDiff = numberToGuess - winner.value;
-                        const nextDiff = numberToGuess - next.value;
-                        if (Math.abs(nextDiff) < Math.abs(winnerDiff)) {
-                            winner = next;
-                        }
                     }
-                });
-                if (winner) {
-                    winner.points = submitionsSnap.size - 1;
                 }
-                return Promise.resolve(winner);
-            })
-            .catch(err => {
-                return Promise.reject(err);
             });
+            if (winner) {
+                winner.points = submitionsSnap.size - 1;
+            }
+            return Promise.resolve(winner);
+        } catch (err) {
+            return Promise.reject(err);
+        }
     }
 
     private updateWinnerScores(winner: any/* ISubmition */) {

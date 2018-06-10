@@ -61,12 +61,12 @@ export class GameEngine {
         const numberToGuess = Math.round(Math.random() * 100 + 1);
         console.log('number to guess: ' + numberToGuess);
 
-        this.getWinner(numberToGuess).then(winner => {
+        this.getWinner(numberToGuess).then(winners => {
             this.gameDocRef
                 .set({
                     isEnded: true,
                     numberToGuess: numberToGuess,
-                    winner: winner
+                    winners: winners
                 } /* as IGame */, { merge: true })
                 .then(doc => {
                     console.log('game ended: ' + this.gameId);
@@ -75,18 +75,18 @@ export class GameEngine {
                     console.log(err);
                 });
 
-            if (winner) {
-                const name = winner.userDisplayName;
+            winners.forEach(w => {
+                const name = w.userDisplayName;
                 if (name !== 'Bot 1' && name !== 'Bot 2' && name !== 'Bot 3') {
-                    this.updateWinnerScores(winner)
+                    this.updateWinnerScores(w)
                 }
-            }
+            });
         }).catch(err => {
             console.log(err);
         });
     }
 
-    private async getWinner(numberToGuess: number): Promise<any/* ISubmition */> {
+    private async getWinner(numberToGuess: number): Promise<any[]/* ISubmition */> {
         console.log('getWinner() - ' + this.gameId);
 
         try {
@@ -95,6 +95,7 @@ export class GameEngine {
             console.log('submitionsSnap size = ' + submitionsSnap.size);
 
             let winner: any/* ISubmition */ = null;
+            let additionalWinnes: any[]/* ISubmition */ = [];
             submitionsSnap.forEach(snap => {
                 const next: any/* ISubmition */ = snap.data() /* as ISubmition */;
                 if (!winner) {
@@ -104,13 +105,21 @@ export class GameEngine {
                     const nextDiff = numberToGuess - next.value;
                     if (Math.abs(nextDiff) < Math.abs(winnerDiff)) {
                         winner = next;
+                        additionalWinnes = [];
+                    } else if (Math.abs(nextDiff) === Math.abs(winnerDiff)) {
+                        additionalWinnes.push(next);
                     }
+
                 }
             });
+            let winners;
             if (winner) {
-                winner.points = submitionsSnap.size - 1;
+                winners = [winner, ...additionalWinnes];
+                winners.forEach(w => {
+                    w.points = submitionsSnap.size - 1;
+                });
             }
-            return Promise.resolve(winner);
+            return Promise.resolve(winners);
         } catch (err) {
             return Promise.reject(err);
         }

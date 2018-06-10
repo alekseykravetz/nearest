@@ -1,8 +1,8 @@
-<mat-card *ngIf="game?.winner as winner" class="animated 4s rubberBand">
+<mat-card *ngIf="game?.winners as winners" class="animated 4s rubberBand">
   <mat-toolbar color="accent">
-    <h2>Winner: {{winner.value}}</h2>
+    <h2>Winner: {{winners[0].value}}</h2>
   </mat-toolbar>
-  <mat-toolbar color="accent" >
+  <mat-toolbar *ngFor="let winner of winners" color="accent" >
     <span id="winner-label">{{ winner.userDisplayName }}</span>
     <img class="nearest-cercle winner-image" [src]="winner.photoURL" />
   </mat-toolbar>

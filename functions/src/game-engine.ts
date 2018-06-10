@@ -32,7 +32,7 @@ export class GameEngine {
         this.addBots();
     }
 
-    async addBots(): Promise<void> {
+    addBots() {
         let botNum = 0;
         const botsTimer = setInterval(async () => {
             botNum++;
@@ -50,7 +50,7 @@ export class GameEngine {
                     clearInterval(botsTimer);
                 }
             } catch (err) {
-                console.log('addBots() - add submition Failed' + err);
+                console.log('addBots() -> add submition Failed' + err);
             }
         }, 1000 * 15);
     }

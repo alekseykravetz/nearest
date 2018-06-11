@@ -15,15 +15,16 @@
     flex-direction: column;
 }
 
-.side-panel .free-space {
+.side-panel-free-space {
     flex-grow: 1;
+    cursor: pointer;
 }
 
 mat-divider {
     padding: 0.5rem 0;
 }
 
-.toggle-button-disabled {
+.toggle-disabled {
     color: rgb(212, 202, 202);
     cursor: default;
 }
@@ -37,7 +38,7 @@ i:focus {
     outline: none;   
 }
 
-i:hover:not(.toggle-button-disabled) {
+i:hover:not(.toggle-disabled) {
     transition: 0.3s;
     transform: scale(1.1);
 }
@@ -46,6 +47,3 @@ i.active-link {
     color: yellow;
     cursor: default;
 }
-
-
-

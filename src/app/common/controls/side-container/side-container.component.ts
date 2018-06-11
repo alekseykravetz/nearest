@@ -22,6 +22,9 @@ export class SideContainerComponent {
     private location: Location) {
 
     sideBarConfService.asideContentEnabledSubject.subscribe(sideEnabled => {
+      if (sideEnabled === false && this.asideOpen) {
+        this.matDrawer.toggle();
+      }
       this.asideContentEnabled = sideEnabled;
     });
     sideBarConfService.additionalButtonsSubject.subscribe(buttons => {

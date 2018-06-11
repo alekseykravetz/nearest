@@ -8,7 +8,7 @@
 
     <div class="side-panel mat-toolbar mat-primary">
 
-      <i title="toggle" class="toggle-button fas" [ngClass]="{'fa-toggle-off' : !asideOpen, 'fa-toggle-on' : asideOpen, 'toggle-button-disabled' : !asideContentEnabled}"
+      <i title="toggle" class="toggle-button fas" [ngClass]="{'fa-toggle-off' : !asideOpen, 'fa-toggle-on' : asideOpen, 'toggle-disabled' : !asideContentEnabled}"
         (click)="toggle()"></i>
 
       <mat-divider></mat-divider>
@@ -23,7 +23,7 @@
         <i [ngClass]="[additionalButton.iconClass]"></i>
       </div>
 
-      <div title="toggle" class="toggle-button free-space" [ngClass]="{'toggle-button-disabled' : !asideContentEnabled}" (click)="toggle()"></div>
+      <div class="side-panel-free-space" [ngClass]="{'toggle-disabled' : !asideContentEnabled}" (click)="toggle()"></div>
 
     </div>
 

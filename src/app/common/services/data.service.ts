@@ -43,4 +43,8 @@ export class DataService {
     return this.db.collection<IGame>('games', ref => ref.where('isEnded', '==', false));
   }
 
+  getAllGames(): Observable<IGame[]> {
+    return this.db.collection<IGame>('games').valueChanges();
+  }
+
 }

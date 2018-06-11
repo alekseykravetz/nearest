@@ -1,4 +1,7 @@
+import { IGame } from 'models/game';
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../common/services/data.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-history',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoryComponent implements OnInit {
 
-  constructor() { }
+  games$: Observable<IGame[]>;
+
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    this.games$ = this.dataService.getAllGames();
   }
 
 }

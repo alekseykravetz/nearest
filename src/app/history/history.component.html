@@ -1,3 +1,15 @@
-<p>
-  history works!
-</p>
+<ng-container *ngIf="(games$ | async) as games">
+  <mat-card *ngIf="games?.length > 0">
+    <mat-card-title>
+      Games History
+    </mat-card-title>
+    <mat-list>
+      <mat-list-item *ngFor="let game of games" style="height: auto;">
+        <div routerLink="/games/{{game.id}}">
+          <span>{{game.createDate | date:'hh:mm:ss'}} - {{game.title}}</span>
+        </div>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </mat-card>
+</ng-container>

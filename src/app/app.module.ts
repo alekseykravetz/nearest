@@ -41,6 +41,7 @@ import { GuessSelectorComponent } from './game/guess-selector/guess-selector.com
 import { SubmitionsComponent as GameSubmitionsComponent } from './game/submitions/submitions.component';
 import { WinnerComponent } from './game/winner/winner.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { HistoryComponent } from './history/history.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     GameCreatorComponent,
     LeaderboardComponent,
     NotFoundComponent,
+    HistoryComponent,
   ],
   imports: [
     BrowserModule,

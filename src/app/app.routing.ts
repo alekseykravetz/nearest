@@ -5,16 +5,19 @@ import { GameComponent } from './game/game.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { AuthGuardService } from './common/guards/auth.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { HistoryComponent } from './history/history.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'games/:id', component: GameComponent, canActivate: [AuthGuardService] },
   { path: 'leaderboard', component: LeaderboardComponent },
+  { path: 'history', component: HistoryComponent },
   { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

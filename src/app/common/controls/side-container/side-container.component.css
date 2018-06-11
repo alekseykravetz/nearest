@@ -33,7 +33,19 @@ i {
     margin: 0.5rem 0;
 }
 
+i:focus {
+    outline: none;   
+}
+
 i:hover:not(.toggle-button-disabled) {
     transition: 0.3s;
     transform: scale(1.1);
 }
+
+i.active-link {
+    color: yellow;
+    cursor: default;
+}
+
+
+

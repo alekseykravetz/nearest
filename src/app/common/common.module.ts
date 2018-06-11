@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 
 import { environment } from '../../environments/environment';
 import { AngularFireModule } from 'angularfire2';
@@ -7,7 +8,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
-import { MatSidenavModule } from '@angular/material';
+import { MatSidenavModule, MatListModule } from '@angular/material';
 
 import { UserBoxComponent } from './controls/user-box/user-box.component';
 import { SideContainerComponent } from './controls/side-container/side-container.component';
@@ -30,12 +31,15 @@ import { AuthGuardService } from './guards/auth.guard';
     imports: [
         BrowserModule,
 
+        RouterModule,
+
         AngularFireModule.initializeApp(environment.firebase),
         AngularFirestoreModule,
         AngularFireAuthModule,
         AngularFireStorageModule,
 
         MatSidenavModule,
+        MatListModule,
     ],
     providers: [
         DataService,

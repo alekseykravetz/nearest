@@ -9,32 +9,31 @@
 
 .side-panel {
     padding: 0 5px;
-    cursor: pointer;
     box-shadow: 0 3px 3px 3px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);    
     z-index: 100;
+    display: flex;
+    flex-direction: column;
 }
 
-.side-panel > i:hover {
-    transition: 0.3s;
-    transform: scale(1.1);
+.side-panel .free-space {
+    flex-grow: 1;
 }
 
-.side-panel-disabled {
+mat-divider {
+    padding: 0.5rem 0;
+}
+
+.toggle-button-disabled {
     color: rgb(212, 202, 202);
     cursor: default;
 }
 
-.side-panel.side-panel-disabled > i:hover{
-    transform: none;
-}
-
-.additional-buttons {
-    margin: 16px 0;
-    color: white;
+i {
     cursor: pointer;
+    margin: 0.5rem 0;
 }
 
-.additional-buttons i:hover {
+i:hover:not(.toggle-button-disabled) {
     transition: 0.3s;
     transform: scale(1.1);
 }

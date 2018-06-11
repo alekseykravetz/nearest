@@ -5,14 +5,29 @@
   </mat-drawer>
 
   <div class="main-content">
-    <div class="side-panel mat-toolbar mat-primary" [ngClass]="{'side-panel-disabled' : !asideContentEnabled}" (click)="toggle()">
-      <i title="toggle" [ngClass]="{'fas': true, 'fa-toggle-off' : !asideOpen, 'fa-toggle-on' : asideOpen}"></i>
-      <div class="additional-buttons" *ngFor="let additionalButton of additionalButtons" (click)="additionalButtonClicked(additionalButton)">        
-          <i [ngClass]="[additionalButton.iconClass, 'animated 2s fadeIn']"></i>
+
+    <div class="side-panel mat-toolbar mat-primary">
+
+      <i title="toggle" class="toggle-button fas" [ngClass]="{'fa-toggle-off' : !asideOpen, 'fa-toggle-on' : asideOpen, 'toggle-button-disabled' : !asideContentEnabled}"
+        (click)="toggle()"></i>
+
+      <mat-divider></mat-divider>
+
+      <i routerLink="/" class="fas fa-home"></i>
+      <i class="fas fa-backward" (click)="back()"></i>
+
+      <mat-divider></mat-divider>
+
+      <div class="animated 2s fadeIn" *ngFor="let additionalButton of additionalButtons" (click)="additionalButtonClicked(additionalButton)">
+        <i [ngClass]="[additionalButton.iconClass]"></i>
       </div>
+
+      <div title="toggle" class="toggle-button free-space" [ngClass]="{'toggle-button-disabled' : !asideContentEnabled}" (click)="toggle()"></div>
+
     </div>
 
     <ng-content select="[app-side-container-main]"></ng-content>
+
   </div>
 
 </mat-drawer-container>

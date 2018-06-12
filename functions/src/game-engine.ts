@@ -20,7 +20,7 @@ export class GameEngine {
             this.gameDocRef
                 .set({ timeLeftInSeconds: timeLeftInSeconds }, { merge: true })
                 .catch(err => {
-                    console.log(err);
+                    console.log('startGame() failed: ' + err);
                 });
 
             if (timeLeftInSeconds <= 0) {
@@ -39,7 +39,7 @@ export class GameEngine {
             try {
                 if (botNum < 4) {
                     const subRef = await this.addBot();
-                    console.log('Bot Submittion Id: ' + subRef.id);
+                    console.log('Bot submition Id: ' + subRef.id);
                 } else {
                     clearInterval(botsTimer);
                 }
@@ -53,7 +53,7 @@ export class GameEngine {
         return this.gameDocRef.collection('submitions')
             .add({
                 userId: 'bot',
-                userDisplayName: 'Bot ',
+                userDisplayName: 'Bot',
                 value: Math.round(Math.random() * 100 + 1),
                 photoURL: 'https://cdn-images-1.medium.com/max/1200/1*paQ7E6f2VyTKXHpR-aViFg.png'
             } /* as ISubmition */);
@@ -63,31 +63,31 @@ export class GameEngine {
         console.log('endGame() - ' + this.gameId);
 
         const numberToGuess = Math.round(Math.random() * 100 + 1);
-        console.log('number to guess: ' + numberToGuess);
+        console.log('Game Number: ' + numberToGuess);
 
-        this.getWinner(numberToGuess).then(winners => {
-            this.gameDocRef
-                .set({
-                    isEnded: true,
-                    numberToGuess: numberToGuess,
-                    winners: winners
-                } /* as IGame */, { merge: true })
-                .then(doc => {
-                    console.log('game ended: ' + this.gameId);
-                })
-                .catch(err => {
-                    console.log(err);
+        this.getWinner(numberToGuess)
+            .then(winners => {
+                this.gameDocRef
+                    .set({
+                        isEnded: true,
+                        numberToGuess: numberToGuess,
+                        winners: winners
+                    } /* as IGame */, { merge: true })
+                    .then(doc => {
+                        console.log('game ended: ' + this.gameId);
+                    })
+                    .catch(err => {
+                        console.log('endGame() - update game doc - failed: ' + err);
+                    });
+
+                winners.forEach(w => {
+                    if (w.userDisplayName !== 'Bot') {
+                        this.updateWinnerScores(w)
+                    }
                 });
-
-            winners.forEach(w => {
-                const name = w.userDisplayName;
-                if (name !== 'Bot 1' && name !== 'Bot 2' && name !== 'Bot 3') {
-                    this.updateWinnerScores(w)
-                }
+            }).catch(err => {
+                console.log('endGame() - getWinner() - failed: ' + err);
             });
-        }).catch(err => {
-            console.log(err);
-        });
     }
 
     private async getWinner(numberToGuess: number): Promise<any[]/* ISubmition */> {
@@ -113,7 +113,6 @@ export class GameEngine {
                     } else if (Math.abs(nextDiff) === Math.abs(winnerDiff)) {
                         additionalWinnes.push(next);
                     }
-
                 }
             });
             let winners;
@@ -146,7 +145,7 @@ export class GameEngine {
                             displayName: winner.userDisplayName
                         } /* as IUserScore */, { merge: true })
                         .catch(err => {
-                            console.error(err);
+                            console.error('update scores doc failed: ' + err);
                         });
                 } else {
                     console.log('creating new score doc');
@@ -158,12 +157,12 @@ export class GameEngine {
                             displayName: winner.userDisplayName
                         } /* as IUserScore */)
                         .catch(err => {
-                            console.error(err);
+                            console.error('create scores doc failed: ' + err);
                         });
                 }
             })
             .catch(err => {
-                console.error(err);
+                console.error('updateWinnerScores() - get user scores doc failed: ' + err);
             });
     }
 }

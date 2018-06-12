@@ -33,12 +33,12 @@ export class GameComponent implements OnInit, OnDestroy {
     private sideBarConfService: SideBarConfigurationService) {
 
     sideBarConfService.disableAsideContent();
-/*     sideBarConfService.changeAdditionalButtons([{
-      iconClass: 'fas fa-backward',
+    sideBarConfService.changeAdditionalButtons([{
+      iconClass: 'fab fa-android',
       action: this.goBack,
       // todo: remove actionContext
       actionContext: this
-    }] as IAdditionalButton[]); */
+    }] as IAdditionalButton[]);
   }
 
   ngOnInit() {
@@ -73,6 +73,6 @@ export class GameComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sideBarConfService.enableAsideContent();
-    // this.sideBarConfService.changeAdditionalButtons([]);
+    this.sideBarConfService.changeAdditionalButtons([]);
   }
 }

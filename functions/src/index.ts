@@ -11,7 +11,7 @@ admin.initializeApp();
 export const gameCreated = functions.firestore.document('games/{gameId}').onCreate(snap => {
 
     console.log('game created: ' + snap.ref.id);
-    
+
     new GameEngine(snap.ref.id).startGame();
 
     const createMoment = moment();
@@ -24,4 +24,10 @@ export const gameCreated = functions.firestore.document('games/{gameId}').onCrea
         isEnded: false,
         id: snap.ref.id
     } /* as IGame */, { merge: true });
+});
+
+export const addBot = functions.https.onRequest((req, res) => {
+    console.log(req);
+    console.log(res);
+    return res.status(200).send('hi from [addBot] cloud function.');
 });

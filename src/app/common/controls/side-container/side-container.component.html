@@ -19,10 +19,11 @@
 
       <mat-divider></mat-divider>
 
-      <div class="animated 2s fadeIn" *ngFor="let additionalButton of additionalButtons" (click)="additionalButtonClicked(additionalButton)">
-        <i [ngClass]="[additionalButton.iconClass]"></i>
-      </div>
+      <i *ngFor="let additionalButton of additionalButtons" class="animated 2s fadeIn" [ngClass]="[additionalButton.iconClass]"
+        (click)="additionalButtonClicked(additionalButton)"></i>
 
+      <mat-divider *ngIf="additionalButtons && additionalButtons.length > 0"></mat-divider>
+        
       <div class="side-panel-free-space" [ngClass]="{'toggle-disabled' : !asideContentEnabled}" (click)="toggle()"></div>
 
     </div>

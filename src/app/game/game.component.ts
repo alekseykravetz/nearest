@@ -41,17 +41,8 @@ export class GameComponent implements OnInit, OnDestroy {
     sideBarConfService.changeAdditionalButtons([{
       iconClass: 'fab fa-android',
       action: this.addBot,
-      // todo: remove actionContext
-      actionContext: this
+      actionContext: this // todo: remove actionContext
     }] as IAdditionalButton[]);
-  }
-
-  addBotRes: string;
-  addBot() {
-    this.http.post<string>('https://us-central1-alex-nearest.cloudfunctions.net/addBot', this.navigatedGameId)
-      .subscribe(value => {
-        this.addBotRes = value;
-      });
   }
 
   ngOnInit() {
@@ -80,8 +71,11 @@ export class GameComponent implements OnInit, OnDestroy {
       } as ISubmition);
   }
 
-  goBack(): void {
-    this.location.back();
+  addBot() {
+    this.http.post<string>('https://us-central1-alex-nearest.cloudfunctions.net/addBot', this.navigatedGameId)
+      .subscribe(value => {
+        console.log('Requested bot submition: ' + value);
+      });
   }
 
   ngOnDestroy() {

@@ -29,13 +29,23 @@ export const gameCreated = functions.firestore.document('games/{gameId}').onCrea
     } /* as IGame */, { merge: true });
 });
 
-export const addBot = functions.https.onRequest(async (req, res) => {
+export const addBot = functions.https.onRequest((req, res) => {
     const gameId = req.body;
     console.log('req.body [gameId]: ' + gameId);
 
-    const subRef = await new GameEngine(gameId).addBot();
-    
-    return cors(req, res, () => {
-        res.status(200).send(subRef.id);
-    });
+    new GameEngine(gameId).addBot()
+        .then(docRef => {
+            console.log(docRef.id);
+
+            return cors(req, res, () => {
+                res.status(200).send(true);
+            });
+        })
+        .catch(err => {
+            console.log(err);
+
+            return cors(req, res, () => {
+                res.status(403).send(false);
+            });
+        })
 });

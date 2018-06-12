@@ -38,13 +38,7 @@ export class GameEngine {
             botNum++;
             try {
                 if (botNum < 4) {
-                    const subRef = await this.gameDocRef.collection('submitions')
-                        .add({
-                            userId: 'bot' + botNum,
-                            userDisplayName: 'Bot ' + botNum,
-                            value: Math.round(Math.random() * 100 + 1),
-                            photoURL: 'https://cdn-images-1.medium.com/max/1200/1*paQ7E6f2VyTKXHpR-aViFg.png'
-                        } /* as ISubmition */);
+                    const subRef = await this.addBot();
                     console.log('Bot Submittion Id: ' + subRef.id);
                 } else {
                     clearInterval(botsTimer);
@@ -53,6 +47,16 @@ export class GameEngine {
                 console.log('addBots() -> add submition Failed' + err);
             }
         }, 1000 * 15);
+    }
+
+    addBot(): Promise<any> /* DocumentReference */ {
+        return this.gameDocRef.collection('submitions')
+            .add({
+                userId: 'bot',
+                userDisplayName: 'Bot ',
+                value: Math.round(Math.random() * 100 + 1),
+                photoURL: 'https://cdn-images-1.medium.com/max/1200/1*paQ7E6f2VyTKXHpR-aViFg.png'
+            } /* as ISubmition */);
     }
 
     endGame() {

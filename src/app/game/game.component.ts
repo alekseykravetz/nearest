@@ -1,3 +1,4 @@
+import { addBot } from './../../../functions/src/index';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -10,6 +11,9 @@ import { IGame } from 'models/game';
 import { ISubmition } from 'models/submition';
 import { SideBarConfigurationService } from '../common/services/side-bar-configuration.service';
 import { IAdditionalButton } from '../../../models/additional-button';
+import { HttpClient } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-game',
@@ -30,15 +34,24 @@ export class GameComponent implements OnInit, OnDestroy {
     private location: Location,
     private dataService: DataService,
     public accountService: AccountService,
-    private sideBarConfService: SideBarConfigurationService) {
+    private sideBarConfService: SideBarConfigurationService,
+    private http: HttpClient) {
 
     sideBarConfService.disableAsideContent();
     sideBarConfService.changeAdditionalButtons([{
       iconClass: 'fab fa-android',
-      action: this.goBack,
+      action: this.addBot,
       // todo: remove actionContext
       actionContext: this
     }] as IAdditionalButton[]);
+  }
+
+  addBotRes: string;
+  addBot() {
+    this.http.post<string>('https://us-central1-alex-nearest.cloudfunctions.net/addBot', this.navigatedGameId)
+      .subscribe(value => {
+        this.addBotRes = value;
+      });
   }
 
   ngOnInit() {

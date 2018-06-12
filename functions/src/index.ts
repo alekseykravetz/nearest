@@ -4,6 +4,9 @@ import { GameEngine } from './game-engine';
 import * as moment from 'moment';
 // import { IGame } from 'models/game';
 
+const cors = require('cors')({
+    origin: true,
+});
 
 admin.initializeApp();
 
@@ -26,8 +29,13 @@ export const gameCreated = functions.firestore.document('games/{gameId}').onCrea
     } /* as IGame */, { merge: true });
 });
 
-export const addBot = functions.https.onRequest((req, res) => {
-    console.log(req);
-    console.log(res);
-    return res.status(200).send('hi from [addBot] cloud function.');
+export const addBot = functions.https.onRequest(async (req, res) => {
+    const gameId = req.body;
+    console.log('req.body [gameId]: ' + gameId);
+
+    const subRef = await new GameEngine(gameId).addBot();
+    
+    return cors(req, res, () => {
+        res.status(200).send(subRef.id);
+    });
 });

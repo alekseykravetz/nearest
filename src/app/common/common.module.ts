@@ -18,6 +18,10 @@ import { AccountService } from './services/account.service';
 import { SideBarConfigurationService } from './services/side-bar-configuration.service';
 import { AuthGuardService } from './guards/auth.guard';
 
+import * as firebase from 'firebase';
+
+// Initialize Firebase App
+firebase.initializeApp(environment.firebase);
 
 @NgModule({
     declarations: [

@@ -29,9 +29,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private getActiveGames() {
-    this.subscription = this.dataService.getActiveGamesCollectionRef().valueChanges().subscribe(activeGames => {
-      this.activeGames = activeGames;
-    });
+    this.subscription = this.dataService.getActiveGames()
+      .subscribe(activeGames => {
+        this.activeGames = activeGames;
+      });
   }
 
   createGame(title: string) {

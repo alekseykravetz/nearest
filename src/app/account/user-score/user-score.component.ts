@@ -20,7 +20,7 @@ export class UserScoreComponent implements OnInit {
 
   ngOnInit() {
     if (this.accountService.user !== null) {
-      this.score$ = this.dataService.getUserScoreDocRef(this.accountService.user.uid).valueChanges();
+      this.score$ = this.dataService.getUserScore(this.accountService.user.uid);
     }
   }
 

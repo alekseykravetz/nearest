@@ -47,7 +47,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.navigatedGameId) {
-      this.dataService.getGameDocRef(this.navigatedGameId).valueChanges().subscribe(game => {
+      this.dataService.getGame(this.navigatedGameId).subscribe(game => {
         this.game = game;
       });
       this.getUserSubmition();
@@ -55,20 +55,19 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private getUserSubmition() {
-    this.dataService.getGameUserSubmitionCollectionRef(this.navigatedGameId, this.accountService.user.uid).valueChanges()
+    this.dataService.getUserSubmitions(this.navigatedGameId, this.accountService.user.uid)
       .subscribe(sub => {
         this.userSubmition = sub[0];
       });
   }
 
   guessSelected(selected: number) {
-    this.dataService.getGameSubmitionsCollectionRef(this.navigatedGameId)
-      .add({
-        userDisplayName: this.accountService.user.displayName,
-        userId: this.accountService.user.uid,
-        photoURL: this.accountService.user.photoURL,
-        value: selected,
-      } as ISubmition);
+    this.dataService.addGameSubmition(this.navigatedGameId, {
+      userDisplayName: this.accountService.user.displayName,
+      userId: this.accountService.user.uid,
+      photoURL: this.accountService.user.photoURL,
+      value: selected,
+    } as ISubmition);
   }
 
   addBot() {

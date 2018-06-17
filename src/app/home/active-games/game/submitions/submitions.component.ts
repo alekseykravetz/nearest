@@ -17,7 +17,7 @@ export class SubmitionsComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-    this.dataService.getGameSubmitionsCollectionRef(this.gameId).valueChanges().subscribe(submitions => {
+    this.dataService.getSubmitions(this.gameId).subscribe(submitions => {
       this.submitions = submitions;
       this.count.emit(this.submitions.length);
     });

@@ -13,6 +13,7 @@ import { MatSidenavModule, MatListModule } from '@angular/material';
 import { UserBoxComponent } from './controls/user-box/user-box.component';
 import { SideContainerComponent } from './controls/side-container/side-container.component';
 
+import { FirebaseDatabaseService } from './services/firebase-database.service';
 import { DataService } from './services/data.service';
 import { AccountService } from './services/account.service';
 import { SideBarConfigurationService } from './services/side-bar-configuration.service';
@@ -46,6 +47,7 @@ firebase.initializeApp(environment.firebase);
         MatListModule,
     ],
     providers: [
+        FirebaseDatabaseService,
         DataService,
         AccountService,
         SideBarConfigurationService,

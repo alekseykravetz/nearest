@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, DocumentChangeAction } from 'angularfire2/firestore';
 import { IGame } from 'models/game';
 import { ISubmition } from 'models/submition';
 import { IUserScore } from 'models/user-score';
-import { Observable } from 'rxjs/Observable';
+import { Observable, pipe, of, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { FirebaseDatabaseService } from './firebase-database.service';
 
 @Injectable()
@@ -13,6 +14,29 @@ export class DataService {
     private db: AngularFirestore,
     private fdService: FirebaseDatabaseService) {
   }
+
+  private historyGamesSubject = new Subject<IGame[]>();
+
+  getUserGamesHistory(userId: string): Observable<IGame[]> {
+
+    this.fdService.getGames().valueChanges().subscribe(games => {
+      const result = [];
+
+      games.forEach(game => {
+        this.fdService.getGameSubmitions(game.id).valueChanges().subscribe(submitions => {
+          const userSubmition = submitions.find(submition => submition.userId === userId);
+          if (userSubmition) {
+            result.push(game);
+          }
+        });
+      });
+
+      this.historyGamesSubject.next(result);
+    });
+
+    return this.historyGamesSubject.asObservable();
+  }
+
 
   addNewGame(game: IGame): string {
     const gameId = this.db.createId();

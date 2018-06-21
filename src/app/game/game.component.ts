@@ -1,9 +1,6 @@
-import { addBot } from './../../../functions/src/index';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { User } from '@firebase/auth-types';
 import { DataService } from '../common/services/data.service';
 import { AccountService } from '../common/services/account.service';
 import * as moment from 'moment';
@@ -13,7 +10,7 @@ import { SideBarConfigurationService } from '../common/services/side-bar-configu
 import { IAdditionalButton } from '../../../models/additional-button';
 import { HttpClient } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-game',

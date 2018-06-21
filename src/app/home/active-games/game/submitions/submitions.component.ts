@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { ISubmition } from 'models/submition';
 import { DataService } from '../../../../common/services/data.service';

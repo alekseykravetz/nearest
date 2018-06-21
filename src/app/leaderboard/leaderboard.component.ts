@@ -1,6 +1,6 @@
 import { DataService } from '../common/services/data.service';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { IUserScore } from 'models/user-score';
 
 @Component({

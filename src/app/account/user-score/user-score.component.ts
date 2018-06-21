@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { DataService } from '../../common/services/data.service';
 import { AccountService } from '../../common/services/account.service';
 import { IUserScore } from 'models/user-score';

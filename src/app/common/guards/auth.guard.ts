@@ -1,8 +1,8 @@
-import { User } from '@firebase/auth-types';
 import { AccountService } from '../services/account.service';
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable, pipe, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
@@ -14,13 +14,16 @@ export class AuthGuardService implements CanActivate {
 
     canActivate(): Observable<boolean> | boolean {
         console.log('AuthGuard called');
-        return this.accountService.user$.map(user => {
-            if (!user) {
-                this.router.navigateByUrl('');
-                console.log('not authenticated');
-                return false;
-            }
-            return true;
-        });
+
+        return this.accountService.user$.pipe(
+            map(user => {
+                if (!user) {
+                    this.router.navigateByUrl('');
+                    console.log('not authenticated');
+                    return false;
+                }
+                return true;
+            })
+        );
     }
 }

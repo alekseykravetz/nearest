@@ -1,7 +1,8 @@
 import { IGame } from 'models/game';
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../common/services/data.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { AccountService } from '../common/services/account.service';
 
 @Component({
   selector: 'app-history',
@@ -11,11 +12,20 @@ import { Observable } from 'rxjs/Observable';
 export class HistoryComponent implements OnInit {
 
   games$: Observable<IGame[]>;
+  games: IGame[];
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService,
+    public accountService: AccountService) {
+  }
 
   ngOnInit() {
-    this.games$ = this.dataService.getAllGames();
+    if (this.accountService.user !== null) {
+      this.games$ = this.dataService.getUserGamesHistory(this.accountService.user.uid);
+
+      this.dataService.getUserGamesHistory(this.accountService.user.uid).subscribe(games => {
+        this.games = games;
+      });
+    }
   }
 
 }

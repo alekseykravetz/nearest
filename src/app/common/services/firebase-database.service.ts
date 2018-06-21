@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, QueryFn } from 'angularfire2/firestore';
+import { Observable } from 'rxjs';
 import { IGame } from 'models/game';
 import { ISubmition } from 'models/submition';
 import { IUserScore } from 'models/user-score';
-import { Observable } from 'rxjs/Observable';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, QueryFn } from 'angularfire2/firestore';
 
 @Injectable()
 export class FirebaseDatabaseService {
@@ -11,6 +11,8 @@ export class FirebaseDatabaseService {
   constructor(
     private db: AngularFirestore) {
   }
+
+
 
   getGames(queryFn?: QueryFn): AngularFirestoreCollection<IGame> {
     return this.db.collection<IGame>('games', queryFn);
